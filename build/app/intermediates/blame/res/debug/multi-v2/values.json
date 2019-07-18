@@ -1,27 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\fans\\Desktop\\ceshi\\flutter_app\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\workspace\\flutter_app\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\fans\\Desktop\\ceshi\\flutter_app\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "353"
-                    },
-                    "to": {
-                        "startLines": "642",
-                        "startColumns": "4",
-                        "startOffsets": "35211",
-                        "endLines": "646",
-                        "endColumns": "12",
-                        "endOffsets": "35503"
-                    }
-                },
                 {
                     "source": "C:\\Users\\fans\\.gradle\\caches\\transforms-2\\files-2.1\\411a37b0adae7cd9dc9d47f1ce387e28\\res\\values\\values.xml",
                     "from": {
@@ -75,6 +56,25 @@
                         "startOffsets": "22777,22859,28906,28953,29001,29051,29105,29163,29216,29277,29323,29381,29439,29494",
                         "endColumns": "81,81,46,47,49,53,57,52,60,45,57,57,54,56",
                         "endOffsets": "22854,22936,28948,28996,29046,29100,29158,29211,29272,29318,29376,29434,29489,29546"
+                    }
+                },
+                {
+                    "source": "D:\\workspace\\flutter_app\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "353"
+                    },
+                    "to": {
+                        "startLines": "642",
+                        "startColumns": "4",
+                        "startOffsets": "35211",
+                        "endLines": "646",
+                        "endColumns": "12",
+                        "endOffsets": "35503"
                     }
                 }
             ]

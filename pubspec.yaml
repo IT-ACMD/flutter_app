@@ -26,6 +26,7 @@ dependencies:
   flutter_screenutil: ^0.5.3
   sharesdk: ^1.1.3
   pin_input_text_field: ^1.0.1
+  flutter_swiper: ^1.0.6
 
 dev_dependencies:
   flutter_test:
@@ -50,6 +51,21 @@ flutter:
   assets:
     - images/QQ.png
     - images/WX.png
+    - images/nhr_health_report.png
+    - images/nhr_lose_plan.png
+    - images/nhr_share.png
+    - images/nhr_weight_records.png
+    - images/diamond.png
+    - images/banner-1.png
+    - images/warning_info.png
+    - images/ecg_info.png
+    - images/nhr_ecg_big.png
+    - images/nhr_ecr_big.png
+    
+    
+
+    
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

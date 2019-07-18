@@ -201,10 +201,9 @@ class _LoginCodeState extends State<LoginCode> {
     );
   }
 
-  //手机号登录文本框
-  Container buildPhoneTextField() {
-    return Container(
-      child: PinInputTextField(
+  //手机验证码文本框
+  PinInputTextField buildPhoneTextField() {
+    return PinInputTextField(
         pinLength: 4,
         autoFocus: true,
         textInputAction: TextInputAction.go,
@@ -216,7 +215,7 @@ class _LoginCodeState extends State<LoginCode> {
           solidColor: Colors.purpleAccent,
           enteredColor: Colors.deepOrange,
           obscureStyle: ObscureStyle(
-              //isTextObscure: false,
+              isTextObscure: false,
               obscureText: '☺️',
             ),
         ),
@@ -225,8 +224,8 @@ class _LoginCodeState extends State<LoginCode> {
           //TODO 验证码输入是否正确
           //Navigator.pushNamed(context,'home');
         },
-      )
-    );
+      );
+  }
     
     /*return Container(
       child: TextFormField(
@@ -247,7 +246,7 @@ class _LoginCodeState extends State<LoginCode> {
       ),
 
     );*/
-  }
+  //}
 
   Padding buildTitleLine() {
     return Padding(
