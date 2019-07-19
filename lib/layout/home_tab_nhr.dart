@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:sharesdk/sharesdk_map.dart';
 
 //主页当前心率tab页面
 class RateTabView extends StatefulWidget {
@@ -9,6 +10,25 @@ class RateTabView extends StatefulWidget {
 class RateTabState extends State<RateTabView> {
   //蓝牙权限开关
   bool isVisible = true;
+  //常用颜色
+  var greyColor = Color.fromARGB(255, 153, 153, 153);
+  var blackColor = Color.fromARGB(255, 51, 51, 51);
+
+  //心电知识图集
+  List _knowledges = [
+    {
+      'title': "两小时掌握心电图阅读，了解自身健康信息",
+      'image': 'images/nhr_ecg_big.png',
+      'url': 'www.baidu.com',
+      'amount': '1.4万'
+    },
+    {
+      'title': "心率对健康到底有多重要",
+      'image': 'images/nhr_ecr_big.png',
+      'url': 'www.baidu.com',
+      'amount': '1.4万'
+    }
+  ];
 
   //轮播图集
   final List<String> secondImageList = [
@@ -18,6 +38,26 @@ class RateTabState extends State<RateTabView> {
     'images/banner-1.png',
   ];
 
+  //心得分享大佬
+  List _heartGetLearder = [
+    {
+      'name': '习大大',
+      'population': '666',
+      'performance': '2019',
+      'image':
+          'https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3680604140,401532791&fm=179&app=42&f=JPEG?w=121&h=140',
+      'link': 'as for'
+    },
+    {
+      'name': '蔡小小',
+      'population': '250',
+      'performance': '2012',
+      'image':
+          'https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2937227107,2706373355&fm=58&bpow=500&bpoh=600',
+      'link': 'as for'
+    }
+  ];
+
   //构造方法
   @override
   Widget build(BuildContext context) {
@@ -25,7 +65,8 @@ class RateTabState extends State<RateTabView> {
       children: <Widget>[
         isVisible ? buildBluetooth() : Container(), //权限title
         Container(
-          height: 1200.0,
+          height: 1500.0,
+          color: Colors.red,
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: <Widget>[
@@ -34,8 +75,13 @@ class RateTabState extends State<RateTabView> {
               buildImageButtons(), //菜单栏
               buildImageCarousel(), //轮播
               buildUserInfoImage(), //用户健康信息
-              buildKnowledgebutton(), //心电知识按钮
+              buildKnowledgebutton('心电知识', '心得知识页面'), //心电知识按钮
               buildKnowledgeDynamic(), //心电知识文章推送
+              Container(height: 12.0),
+              buildKnowledgebutton('心得分享', '心得分享页面'), //心得分享按钮
+              buildHeartGet(), //心得分享
+              buildFindCoach2you(),
+              //buildEndHint(),
             ],
           ),
         ),
@@ -149,8 +195,7 @@ class RateTabState extends State<RateTabView> {
             Positioned(
               child: Text(
                 '当前心率',
-                style: TextStyle(
-                    fontSize: 12.0, color: Color.fromARGB(255, 153, 153, 153)),
+                style: TextStyle(fontSize: 12.0, color: greyColor),
               ),
               left: 20.0,
               top: 14.0,
@@ -170,7 +215,7 @@ class RateTabState extends State<RateTabView> {
                       TextSpan(
                           text: 'bpm',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 153, 153, 153),
+                              color: greyColor,
                               fontSize: 15.0,
                               letterSpacing: 0.0))
                     ]),
@@ -183,15 +228,13 @@ class RateTabState extends State<RateTabView> {
                 text: TextSpan(
                     text: '3 ',
                     style: TextStyle(
-                        color: Color.fromARGB(255, 51, 51, 51),
+                        color: blackColor,
                         fontSize: 22.0,
                         fontWeight: FontWeight.bold),
                     children: <TextSpan>[
                       TextSpan(
                           text: '天没有测试了哦～',
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 153, 153, 153),
-                              fontSize: 12.0))
+                          style: TextStyle(color: greyColor, fontSize: 12.0))
                     ]),
               ),
               right: 15.0,
@@ -312,7 +355,8 @@ class RateTabState extends State<RateTabView> {
                   Positioned(
                     left: 15.0,
                     bottom: 15.0,
-                    child: Text('查看你的健康信息', style: TextStyle(fontSize: 12.0)),
+                    child: Text('查看你的健康信息',
+                        style: TextStyle(fontSize: 12.0, color: greyColor)),
                   ),
                 ])),
             Container(
@@ -332,21 +376,22 @@ class RateTabState extends State<RateTabView> {
                   Positioned(
                     left: 15.0,
                     bottom: 15.0,
-                    child: Text('查看你的健康信息', style: TextStyle(fontSize: 12.0)),
+                    child: Text('查看你的健康信息',
+                        style: TextStyle(fontSize: 12.0, color: greyColor)),
                   ),
                 ])),
           ],
         ));
   }
 
-  buildKnowledgebutton() {
+  buildKnowledgebutton(title, url) {
     return Container(
       height: 40.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            '心电知识',
+            title,
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
           IconButton(
@@ -361,53 +406,178 @@ class RateTabState extends State<RateTabView> {
 
   buildKnowledgeDynamic() {
     return Container(
-        height: 200.0,
-        margin: EdgeInsets.symmetric(vertical: 10.0),
-        child: Row(
+        height: 160.0,
+        child: Column(
+          children: _knowledges
+              .map((item) => Builder(
+                    builder: (context) {
+                      return Expanded(
+                          child: Row(
+                        children: <Widget>[
+                          ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              child: Image.asset(
+                                item['image'],
+                                fit: BoxFit.cover,
+                              )),
+                          Expanded(
+                              child: Container(
+                            padding: EdgeInsets.fromLTRB(15.0, 8.0, 0.0, 10.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  item['title'],
+                                  style: TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                                Text.rich(TextSpan(
+                                    text: '心电知识  ',
+                                    style: TextStyle(
+                                        fontSize: 9.0, color: greyColor),
+                                    children: <TextSpan>[
+                                      TextSpan(text: '${item['amount']}阅读量')
+                                    ]))
+                              ],
+                            ),
+                          ))
+                        ],
+                      ));
+                    },
+                  ))
+              .toList(),
+        ));
+  }
+
+  //心得滚动图
+  buildHeartGet() {
+    return Container(
+        padding: EdgeInsets.only(top: 10.0),
+        height: 240.0,
+        child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: _heartGetLearder
+                .map((item) => Container(
+                    padding: EdgeInsets.only(right: 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          width: 220.0,
+                          height: 160.0,
+                          child: Image.asset(
+                            'images/nhr_thirst_girl.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Container(
+                            margin: EdgeInsets.symmetric(vertical: 12.0),
+                            child: Row(
+                              children: <Widget>[
+                                ClipOval(
+                                    child: Image.network(
+                                  item['image'],
+                                  width: 36.0,
+                                  height: 36.0,
+                                )),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 8.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        item['name'],
+                                        style: TextStyle(
+                                            fontSize: 12.0,
+                                            color: Color.fromARGB(
+                                                255, 51, 51, 51)),
+                                      ),
+                                      Text(
+                                          '帮助${item['population']}人 减脂${item['performance']}斤',
+                                          style: TextStyle(
+                                              fontSize: 10.0,
+                                              color: Color.fromARGB(
+                                                  255, 153, 153, 153)))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ))
+                      ],
+                    )))
+                .toList()));
+  }
+
+  buildFindCoach2you() {
+    return Container(
+        height: 160.0,
+        child: Stack(
           children: <Widget>[
-            ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                child: Image.asset(
-                  'images/nhr_ecg_big.png',
-                  fit: BoxFit.fill,
-                  width: 110.0,
-                  height: 70.0,
-                )),
-            Expanded(
-                child: Container(
-              padding: EdgeInsets.only(left: 15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    '两小时掌握心电图阅读，了解自身健康信息',
-                    maxLines: 5,
-                  ),
-                  SizedBox(
-                    height: 25.0,
-                    child: RaisedButton.icon(
-                      icon: ImageIcon(
-                        AssetImage('images/diamond.png'),
-                        size: 12.0,
-                        color: Color.fromARGB(255, 36, 199, 137),
-                      ),
-                      label: Text(
-                        '普通会员',
-                        style: TextStyle(fontSize: 10.0),
-                      ),
-                      color: Color.fromARGB(255, 241, 244, 243),
-                      highlightColor: Colors.white, //按下颜色
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(22.0)),
-                      onPressed: () {},
-                    ),
-                  )
-                ],
+            Positioned(
+              top: 18.0,
+              child: Text('您的专属教练',
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      color: blackColor,
+                      fontWeight: FontWeight.bold)),
+            ),
+            Positioned(
+              bottom: 20.0,
+              child: Image.asset(
+                'images/nhr_lost_people.png',
+                height: 76.0,
+                width: 66.0,
+                fit: BoxFit.fill,
               ),
-            ))
+            ),
+            Positioned(
+              top: 72.0,
+              left: 95.0,
+              child: Text('寻找适合你的健康教练',
+                  style: TextStyle(fontSize: 12.0, color: blackColor)),
+            ),
+            Positioned(
+              left: 95.0,
+              bottom: 51.0,
+              child: Text('专业 有效 权威',
+                  style: TextStyle(fontSize: 10.0, color: greyColor)),
+            ),
+            Positioned(
+              right: 20.0,
+              bottom: 41.0,
+              child: SizedBox(
+                  height: 28.0,
+                  width: 88.0,
+                  child: RaisedButton(
+                    child: Text('寻找教练',
+                        style: TextStyle(
+                            fontSize: 12.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold)),
+                    color: Color.fromARGB(255, 36, 199, 137),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(22.0)),
+                    onPressed: () {},
+                  )),
+            )
           ],
         ));
+  }
+
+  buildEndHint() {
+    return Expanded(
+        child: Container(
+          color: Color.fromARGB(255, 244, 244, 244),
+      child: Text(
+        '-没有更多内容-',
+        style: TextStyle(
+            fontSize: 11.0, color: Color.fromARGB(255, 189, 189, 189)),
+      ),
+    ));
   }
 }
