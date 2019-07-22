@@ -29,7 +29,7 @@ class _LoginViewState extends State<LoginView> {
     //默认设置宽度1080px, 高度1920px
     ScreenUtil.instance.init(context);
     //设置宽750 高1334，根据系统字体进行缩放
-    //ScreenUtil.instance = ScreenUtil(width: 750, height: 13340, allowFontScaling: true)..init(context);
+    //ScreenUtil.instance = ScreenUtil(width: 1080, height: 1920, allowFontScaling: true)..init(context);
     return Scaffold(
       body: Material(color: Color.fromARGB(255, 82, 77, 85), child: Form(
         key: _formKey,

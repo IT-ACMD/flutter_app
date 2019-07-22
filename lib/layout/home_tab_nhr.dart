@@ -65,8 +65,7 @@ class RateTabState extends State<RateTabView> {
       children: <Widget>[
         isVisible ? buildBluetooth() : Container(), //权限title
         Container(
-          height: 1500.0,
-          color: Colors.red,
+          height: 1200.0,
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: <Widget>[
@@ -85,6 +84,17 @@ class RateTabState extends State<RateTabView> {
             ],
           ),
         ),
+        Container(
+          padding: EdgeInsets.only(top: 20.0),
+          height: 180.0,
+          alignment: Alignment.topCenter,
+          color: Color.fromARGB(255, 244, 244, 244),
+          child: Text(
+            '一没有更多内容一',
+            style: TextStyle(
+                fontSize: 11.0, color: Color.fromARGB(255, 189, 189, 189)),
+          ),
+        )
       ],
     );
   }
@@ -572,7 +582,7 @@ class RateTabState extends State<RateTabView> {
   buildEndHint() {
     return Expanded(
         child: Container(
-          color: Color.fromARGB(255, 244, 244, 244),
+      color: Color.fromARGB(255, 244, 244, 244),
       child: Text(
         '-没有更多内容-',
         style: TextStyle(

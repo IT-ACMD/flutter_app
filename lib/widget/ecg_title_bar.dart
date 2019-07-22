@@ -5,12 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/pages/searchView.dart';
 
+double _myHeight = kToolbarHeight;
+
 //kToolbarHeight  状态栏的高度 包括刘海
 class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
   const _ToolbarContainerLayout();
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
-    return constraints.tighten(height: kToolbarHeight);
+    return constraints.tighten(height: _myHeight);
   }
   @override
   Size getSize(BoxConstraints constraints) {
@@ -40,13 +42,15 @@ class WAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
     this.toolbarOpacity = 1.0,
     this.bottomOpacity = 1.0,
+    this.height = 56.0,
   }) : assert(elevation == null || elevation >= 0.0),
         assert(primary != null),
         assert(titleSpacing != null),
         assert(toolbarOpacity != null),
         assert(bottomOpacity != null),
-        preferredSize = Size.fromHeight(kToolbarHeight + (bottom?.preferredSize?.height ?? 0.0)),
+        preferredSize = Size.fromHeight(height + (bottom?.preferredSize?.height ?? 0.0)),
         super(key: key);
+  final double height;
 
   final Widget child;
 
@@ -87,6 +91,7 @@ class _WAppBarState extends State<WAppBar> {
   static const double _defaultElevation = 0.0;
   @override
   Widget build(BuildContext context) {
+    _myHeight = widget.height;
     assert(!widget.primary || debugCheckHasMediaQuery(context));
     assert(debugCheckHasMaterialLocalizations(context));
     final ThemeData themeData = Theme.of(context);
@@ -140,7 +145,7 @@ class _WAppBarState extends State<WAppBar> {
         children: <Widget>[
           Flexible(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: kToolbarHeight),
+              constraints: const BoxConstraints(maxHeight: double.infinity),
               child: appBar,
             ),
           ),
