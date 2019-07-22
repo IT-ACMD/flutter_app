@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 22 09:43:45 CST 2019
+#Mon Jul 22 17:18:57 CST 2019
 60.set=ASSET
 52.set=ASSET
 53.base=D\:\\workspace\\flutter_app\\build\\app\\intermediates\\merged_assets\\debug\\out

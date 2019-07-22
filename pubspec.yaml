@@ -63,6 +63,10 @@ flutter:
     - images/nhr_ecr_big.png
     - images/nhr_thirst_girl.png
     - images/nhr_lost_people.png
+    - images/ecg_user1.png
+    - images/ecg_user2.png
+    - images/rank_friend_pk.png
+
     
     
 

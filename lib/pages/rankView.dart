@@ -22,7 +22,8 @@ class _RankViewState extends State<RankView> {
         appBar: WAppBar(
           child: buildmytopbar(),
           bottom: TabBar(
-            labelPadding: EdgeInsets.symmetric(horizontal: 88.0),
+            labelPadding: EdgeInsets.symmetric(horizontal: 80.0),
+            labelStyle: TextStyle(fontSize: 16.0,color: Color.fromARGB(255, 51, 51, 51),fontWeight: FontWeight.bold),
             indicatorSize: TabBarIndicatorSize.label,
             isScrollable: true,
             tabs: tabNames.map((e) {
@@ -30,6 +31,7 @@ class _RankViewState extends State<RankView> {
                 text: e,
               );
             }).toList(),
+            unselectedLabelColor: Color(0xFF999999),
             labelColor: Colors.black,
           ),
           backgroundColor: Colors.white,
@@ -45,6 +47,7 @@ class _RankViewState extends State<RankView> {
     ));
   }
 
+  //头部导航栏
   Widget buildmytopbar() {
     return Container(
         padding: EdgeInsets.all(13.0),
@@ -55,7 +58,7 @@ class _RankViewState extends State<RankView> {
               '排行',
               style: TextStyle(fontSize: 23.0, color: Colors.black),
             ),
-            Icon(Icons.share)
+            Icon(Icons.share,color: Colors.black,)
           ],
         ));
   }
