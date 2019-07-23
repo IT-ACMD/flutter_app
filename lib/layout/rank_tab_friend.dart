@@ -106,15 +106,20 @@ class _FriendTabState extends State<FriendTabView> {
                 Container(
                   alignment: Alignment.center,
                   height: 26.0,
-                  decoration: i<3 ? BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage('https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng733217c03ea7411956fa35062f87dbdc'),
-                      fit: BoxFit.contain,
-                    ),
-                  ) : null,
+                  decoration: i < 3
+                      ? BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng733217c03ea7411956fa35062f87dbdc'),
+                            fit: BoxFit.contain,
+                          ),
+                        )
+                      : null,
                   padding: EdgeInsets.symmetric(horizontal: 26.0),
                   child: Text('${i + 1}',
-                      style: TextStyle(color: i < 3 ? Color(0xFFFFFFFF) : Color(0xFF6C6B70),fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          color: i < 3 ? Color(0xFFFFFFFF) : Color(0xFF6C6B70),
+                          fontWeight: FontWeight.bold)),
                 ),
                 ClipOval(
                     child: Image.network(
@@ -156,7 +161,18 @@ class _FriendTabState extends State<FriendTabView> {
                       )),
                 ),
                 Expanded(
-                  child: Container(child: Text('PK'),),
+                  child: GestureDetector(
+                    child: Container(
+                      padding: EdgeInsets.only(right: 17.0),
+                      alignment: Alignment.centerRight,
+                      child: ImageIcon(
+                        AssetImage('images/rank_friend_pk.png'),
+                        color: Color(0xFF24C789),
+                      ),
+                    ),
+                    onTap: () {
+                    },
+                  ),
                 ),
               ],
             ));

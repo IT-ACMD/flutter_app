@@ -66,6 +66,10 @@ flutter:
     - images/ecg_user1.png
     - images/ecg_user2.png
     - images/rank_friend_pk.png
+    - images/coach_up.png
+    - images/message.png
+    - images/warning.png
+    - images/settings.png
 
     
     

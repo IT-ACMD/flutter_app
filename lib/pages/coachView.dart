@@ -5,27 +5,50 @@ import '../layout/coach_tab_tips.dart';
 import '../layout/coach_tab_course.dart';
 
 class CoachView extends StatefulWidget {
-  _CoachViewState createState() => _CoachViewState();
+  const CoachView({Key key}) : super(key: key);
+  @override
+  _CoachViewState createState() => new _CoachViewState();
 }
 
-class _CoachViewState extends State<CoachView> {
+class _CoachViewState extends State<CoachView>
+    with SingleTickerProviderStateMixin {
   // final Widget child;
   // HomeView({Key key, this.child}) : super(key: key);
 
   List tabNames = ['心得', '课程'];
 
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = new TabController(vsync: this, length: tabNames.length);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: DefaultTabController(
-      child: Scaffold(
+    return Scaffold(
         appBar: WAppBar(
           child: buildmytopbar(),
           bottom: TabBar(
-            labelPadding: EdgeInsets.symmetric(horizontal: 80.0),
-            labelStyle: TextStyle(fontSize: 16.0,color: Color.fromARGB(255, 51, 51, 51),fontWeight: FontWeight.bold),
+            onTap: (index){
+              setState(() {
+                
+              });
+            },
+            controller: _tabController,
+            //labelPadding: EdgeInsets.symmetric(horizontal: 80.0),
+            labelStyle: TextStyle(
+                fontSize: 16.0,
+                color: Color.fromARGB(255, 51, 51, 51),
+                fontWeight: FontWeight.bold),
             indicatorSize: TabBarIndicatorSize.label,
-            isScrollable: true,
             tabs: tabNames.map((e) {
               return Tab(
                 text: e,
@@ -38,14 +61,22 @@ class _CoachViewState extends State<CoachView> {
           elevation: 0.5,
         ),
         body: new TabBarView(
+          controller: _tabController,
           children: <Widget>[
             TipsTabView(),
             CourseTabView(),
           ],
         ),
-      ),
-      length: tabNames.length,
-    ));
+        floatingActionButton: _tabController.index == 0
+            ? FloatingActionButton(
+                child: Icon(Icons.photo_camera),
+                backgroundColor: Color(0xFF24C789),
+                onPressed: () {
+                  //todo 照相
+                },
+              )
+            : null,
+      );
   }
 
   //头部导航栏
@@ -59,7 +90,10 @@ class _CoachViewState extends State<CoachView> {
               '教练',
               style: TextStyle(fontSize: 23.0, color: Colors.black),
             ),
-            Icon(Icons.list,color: Colors.black,)
+            Icon(
+              Icons.list,
+              color: Colors.black,
+            )
           ],
         ));
   }
