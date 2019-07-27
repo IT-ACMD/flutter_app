@@ -445,7 +445,7 @@
     <string name="ssdk_gender_female">女</string>
     <string name="ssdk_gender_male">男</string>
     <string name="ssdk_google_plus_client_inavailable">Google+ 版本过低或者没有安装，需要升级或安装Google+才能使用！</string>
-    <string name="ssdk_googleplus">Google+</string>
+    <string name="ssdk_googleplus">Google</string>
     <string name="ssdk_instagram">Instagram</string>
     <string name="ssdk_instagram_client_inavailable">Instagram版本过低或者没有安装，需要升级或安装Instagram才能使用！</string>
     <string name="ssdk_instapager_email_or_password_incorrect">Email或密码不正确</string>
@@ -633,6 +633,7 @@ function login(form){
     <string name="ssdk_wechatmoments">微信朋友圈</string>
     <string name="ssdk_weibo_oauth_regiseter">应用授权</string>
     <string name="ssdk_weibo_upload_content">分享图片</string>
+    <string name="ssdk_wework">企业微信</string>
     <string name="ssdk_whatsapp">WhatsApp</string>
     <string name="ssdk_whatsapp_client_inavailable">目前您的WhatsApp版本过低或未安装，需要安装WhatsApp才能使用</string>
     <string name="ssdk_yixin">易信</string>

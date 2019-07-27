@@ -109,9 +109,10 @@ class _FriendTabState extends State<FriendTabView> {
                   decoration: i < 3
                       ? BoxDecoration(
                           image: DecorationImage(
-                            image: NetworkImage(
-                                'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng733217c03ea7411956fa35062f87dbdc'),
+                            image: AssetImage(
+                                'images/rank_top_back.png'),
                             fit: BoxFit.contain,
+                            colorFilter: ColorFilter.mode(getColor(i), BlendMode.srcIn),
                           ),
                         )
                       : null,
@@ -178,5 +179,16 @@ class _FriendTabState extends State<FriendTabView> {
             ));
       }),
     ));
+  }
+
+  getColor(i){
+    var color;
+    if(i == 0)
+      color = Color(0xFFFFC460);
+    else if(i ==  1)
+      color = Color(0xFFB4B4B6);
+    else
+      color = Color(0xFFC18C69);
+    return color;
   }
 }

@@ -18,19 +18,19 @@ class _UserViewState extends State<UserView> {
         ),
         body: Container(
           color: Color(0xFFF8F8F8),
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            children: <Widget>[
-              buildUserBack(), //用户背景
-              builduserInfo(), //用户流量信息
-              buildUserPlan(), //用户运动计划
-              buildUserRecord(),  //用户运动记录
-              //todo 用户预警设置
-              //buildUserSettings(),
-              //todo 用户设置
-            ],
-          ),
+          height: 2200.0,
+          child: ListView(children: <Widget>[
+            Column(
+              children: <Widget>[
+                buildUserBack(), //用户背景
+                builduserInfo(), //用户流量信息
+                buildUserPlan(), //用户运动计划
+                buildUserRecord(), //用户运动记录
+                buildWarningSettings(), //用户预警设置
+                buildUsergSettings() //用户设置
+              ],
+            )
+          ]),
         ),
       ),
     );
@@ -114,9 +114,10 @@ class _UserViewState extends State<UserView> {
               child: Align(
             //padding: EdgeInsets.only(right: 0.0),
             alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.keyboard_arrow_right,
-              size: 28.0,
+            child: Image.network(
+              'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+              height: 14.0,
+              width: 8.0,
             ),
           ))
         ],
@@ -207,20 +208,31 @@ class _UserViewState extends State<UserView> {
               ),
               Container(
                 padding: EdgeInsets.only(right: 22.0),
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 28.0,
+                child: Image.network(
+                  'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+                  height: 14.0,
+                  width: 8.0,
                 ),
               )
             ],
-          ),Row(
+          ),
+          Row(
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(17.0, 0.0, 7.0, 11.0),
-                child: Text('95.5',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color: Color(0xFF524d55)),),
+                child: Text(
+                  '95.5',
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF524d55)),
+                ),
               ),
               Container(
-                child: Text('计划体重Kg',style: TextStyle(fontSize: 11.0,color: Color(0xFF999999)),),
+                child: Text(
+                  '计划体重Kg',
+                  style: TextStyle(fontSize: 11.0, color: Color(0xFF999999)),
+                ),
               )
             ],
           ),
@@ -228,9 +240,10 @@ class _UserViewState extends State<UserView> {
       ),
     );
   }
-  buildUserRecord(){
-     return Container(
-      margin: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+
+  buildUserRecord() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 12.0),
       color: Colors.white,
       child: Column(
         children: <Widget>[
@@ -243,25 +256,100 @@ class _UserViewState extends State<UserView> {
               ),
               Container(
                 padding: EdgeInsets.only(right: 22.0),
-                child: Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 28.0,
+                child: Image.network(
+                  'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+                  height: 14.0,
+                  width: 8.0,
                 ),
               )
             ],
-          ),Row(
+          ),
+          Row(
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(17.0, 0.0, 7.0, 11.0),
-                child: Text('0',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color: Color(0xFF524d55)),),
+                child: Text(
+                  '0',
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF524d55)),
+                ),
               ),
               Container(
-                child: Text('总运动分钟',style: TextStyle(fontSize: 11.0,color: Color(0xFF999999)),),
+                child: Text(
+                  '总运动分钟',
+                  style: TextStyle(fontSize: 11.0, color: Color(0xFF999999)),
+                ),
               )
             ],
           ),
         ],
       ),
+    );
+  }
+
+  buildWarningSettings() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 12.0),
+      color: Colors.white,
+      child: Container(
+          padding: EdgeInsets.fromLTRB(18.0, 15.0, 22.0, 14.0),
+          child: Row(
+            children: <Widget>[
+              Image.asset(
+                'images/warning.png',
+                width: 18.0,
+                height: 20.0,
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 10.0),
+                  child: Text(
+                    '预警设置',
+                    style: TextStyle(color: Color(0xFF524D55)),
+                  )),
+              Expanded(
+                  child: Container(
+                      alignment: Alignment.centerRight,
+                      child: Image.network(
+                        'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+                        height: 14.0,
+                        width: 8.0,
+                      )))
+            ],
+          )),
+    );
+  }
+
+  buildUsergSettings() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 12.0),
+      color: Colors.white,
+      child: Container(
+          padding: EdgeInsets.fromLTRB(18.0, 15.0, 22.0, 14.0),
+          child: Row(
+            children: <Widget>[
+              Image.asset(
+                'images/settings.png',
+                width: 18.0,
+                height: 20.0,
+              ),
+              Container(
+                  margin: EdgeInsets.only(left: 10.0),
+                  child: Text(
+                    '设置',
+                    style: TextStyle(color: Color(0xFF524D55)),
+                  )),
+              Expanded(
+                  child: Container(
+                      alignment: Alignment.centerRight,
+                      child: Image.network(
+                        'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+                        height: 14.0,
+                        width: 8.0,
+                      )))
+            ],
+          )),
     );
   }
 }

@@ -129,11 +129,11 @@ class _LoginCodeState extends State<LoginCode> {
               ///只有输入的内容符合要求通过才会到达此处
               _formKey.currentState.save();
               //= 执行登录方法
-              Navigator.pushNamed(context, "home");
+              Navigator.pushNamed(context, "askPage");
               //print('email:$_email , assword:$_password');
             }
           },
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),//StadiumBorder(side: BorderSide()),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),//StadiumBorder(side: BorderSide()),
         ),
       ),
     );
@@ -184,22 +184,8 @@ class _LoginCodeState extends State<LoginCode> {
     );
   }
 
-  //邮箱登录文本框
-  TextFormField buildEmailTextField() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Emall Address',
-      ),
-      validator: (String value) {
-        var emailReg = RegExp(
-            r"[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?");
-        if (!emailReg.hasMatch(value)) {
-          return '请输入正确的邮箱地址';
-        }
-      },
-      onSaved: (String value) => _email = value,
-    );
-  }
+  PinEditingController _pinEditingController =
+      PinEditingController(pinLength: 4, autoDispose: false);
 
   //手机验证码文本框
   PinInputTextField buildPhoneTextField() {
@@ -208,12 +194,12 @@ class _LoginCodeState extends State<LoginCode> {
         autoFocus: true,
         textInputAction: TextInputAction.go,
         enabled: true,
-        pinEditingController: PinEditingController(pinLength: 4, autoDispose: false),
+        pinEditingController: _pinEditingController,
         decoration: BoxLooseDecoration(
-          textStyle: TextStyle(color: Colors.black,fontSize: 24.0),
-          //strokeColor: Colors.transparent,
-          solidColor: Colors.purpleAccent,
-          enteredColor: Colors.deepOrange,
+          textStyle: TextStyle(color: Colors.white,fontSize: 24.0),
+          strokeColor: Color(0xFF726E74),
+          solidColor: Color(0xFF726E74),
+          enteredColor: Color(0xFF726E74),
           obscureStyle: ObscureStyle(
               isTextObscure: false,
               obscureText: '☺️',

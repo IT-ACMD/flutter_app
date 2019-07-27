@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/UserInfo/askPage.dart';
 import 'package:flutter_app/pages/loginCode.dart';
 //引入自定义的其他页面文件
 import 'layout/BottomMenu.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         'loginPage': (_) => LoginView(),
         'home': (_) =>BottomMenu(),
         'loginCode': (_) =>LoginCode(),
+        'askPage':(_) =>AskPage(),
       },
     );
   }

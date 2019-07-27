@@ -307,7 +307,7 @@
     <string name="ssdk_gender_female">Female</string>
     <string name="ssdk_gender_male">Male</string>
     <string name="ssdk_google_plus_client_inavailable">Google+ client not exists or the version is too low</string>
-    <string name="ssdk_googleplus">Google+</string>
+    <string name="ssdk_googleplus">Google</string>
     <string name="ssdk_instagram">Instagram</string>
     <string name="ssdk_instagram_client_inavailable">Instagram client not exists or the version is too low</string>
     <string name="ssdk_instapager_email_or_password_incorrect">Email or Password incorrect</string>
@@ -429,6 +429,7 @@
     <string name="ssdk_wechatmoments">WeChat Moments</string>
     <string name="ssdk_weibo_oauth_regiseter">Authorization</string>
     <string name="ssdk_weibo_upload_content">分享图片</string>
+    <string name="ssdk_wework">wework</string>
     <string name="ssdk_whatsapp">WhatsApp</string>
     <string name="ssdk_whatsapp_client_inavailable">WhatsApp client not exists or the version is too low</string>
     <string name="ssdk_yixin">Yixin</string>

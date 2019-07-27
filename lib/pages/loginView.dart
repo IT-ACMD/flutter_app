@@ -218,7 +218,7 @@ class _LoginViewState extends State<LoginView> {
               //Navigator.pushNamed(context, "home");
             }
           },
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),//StadiumBorder(side: BorderSide()),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),//StadiumBorder(side: BorderSide()),
         ),
       ),
     );

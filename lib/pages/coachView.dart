@@ -34,55 +34,59 @@ class _CoachViewState extends State<CoachView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: WAppBar(
-          child: buildmytopbar(),
-          bottom: TabBar(
-            onTap: (index){
-              setState(() {
-                
-              });
-            },
-            controller: _tabController,
-            //labelPadding: EdgeInsets.symmetric(horizontal: 80.0),
-            labelStyle: TextStyle(
-                fontSize: 16.0,
-                color: Color.fromARGB(255, 51, 51, 51),
-                fontWeight: FontWeight.bold),
-            indicatorSize: TabBarIndicatorSize.label,
-            tabs: tabNames.map((e) {
-              return Tab(
-                text: e,
-              );
-            }).toList(),
-            unselectedLabelColor: Color(0xFF999999),
-            labelColor: Colors.black,
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0.5,
-        ),
-        body: new TabBarView(
+      appBar: WAppBar(
+        child: buildmytopbar(),
+        bottom: TabBar(
+          onTap: (index) {
+            setState(() {});
+          },
           controller: _tabController,
-          children: <Widget>[
-            TipsTabView(),
-            CourseTabView(),
-          ],
+          //labelPadding: EdgeInsets.symmetric(horizontal: 80.0),
+          labelStyle: TextStyle(
+              fontSize: 16.0,
+              color: Color.fromARGB(255, 51, 51, 51),
+              fontWeight: FontWeight.bold),
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorColor: Color(0xFF524D55),
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(
+              width: 2.0,
+            ),
+          ),
+          tabs: tabNames.map((e) {
+            return Tab(
+              text: e,
+            );
+          }).toList(),
+          unselectedLabelColor: Color(0xFF999999),
+          labelColor: Colors.black,
         ),
-        floatingActionButton: _tabController.index == 0
-            ? FloatingActionButton(
-                child: Icon(Icons.photo_camera),
-                backgroundColor: Color(0xFF24C789),
-                onPressed: () {
-                  //todo 照相
-                },
-              )
-            : null,
-      );
+        backgroundColor: Colors.white,
+        elevation: 0.5,
+      ),
+      body: new TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          TipsTabView(),
+          CourseTabView(),
+        ],
+      ),
+      floatingActionButton: _tabController.index == 0
+          ? FloatingActionButton(
+              child: Icon(Icons.photo_camera),
+              backgroundColor: Color(0xFF24C789),
+              onPressed: () {
+                //todo 照相
+              },
+            )
+          : null,
+    );
   }
 
   //头部导航栏
   Widget buildmytopbar() {
     return Container(
-        padding: EdgeInsets.all(13.0),
+        padding: EdgeInsets.fromLTRB(16.0, 13.0, 17.0, 13.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
