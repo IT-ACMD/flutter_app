@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/data/userInfo.dart';
+import 'package:flutter_app/widget/BirthdayPage.dart';
+import 'package:numberpicker/numberpicker.dart';
+
+import 'locationInfo.dart';
 
 class SexBirth extends StatefulWidget {
   final UserInfo user;
@@ -42,7 +46,7 @@ class _SexBirthState extends State<SexBirth> {
               padding: EdgeInsets.symmetric(horizontal: 45.0),
               children: <Widget>[
                 SizedBox(
-                  height: 72.0,
+                  height: 62.0,
                 ),
                 buildTitleText('你的性别？'),
                 SizedBox(
@@ -53,8 +57,14 @@ class _SexBirthState extends State<SexBirth> {
                   height: 80.0,
                 ),
                 buildTitleText('你的出生年月？'),
-                buildBirthDate(context),
-
+                SizedBox(
+                  height: 30.0,
+                ),
+                buildBirthDate(),
+                SizedBox(
+                  height: 100.0,
+                ),
+                buildNextButton(),
               ],
             ),
           ),
@@ -135,39 +145,50 @@ class _SexBirthState extends State<SexBirth> {
     );
   }
 
-  buildBirthDate(context){
-    return GestureDetector(
-      child: Text('23131323'),
-      onTap: (){
-        showDatePicker(context: context,initialDate: DateTime(1990), firstDate: DateTime(1990), lastDate: DateTime(2019));
-      },
-    );
+  void _showDialog() {
+    showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return BirthdayPage();
+        }).then((value) {
+      if (value != null) {
+        setState(() => _birthDate = value);
+      }
+    });
+  }
 
-    
-    
-    //return .showDialog(context: context);
-    //return showDatePicker();
-    //_DatePickerDialog();
-    
-    
+  String _birthDate = '1999年12月12日';
+
+  buildBirthDate() {
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+      Container(
+        width: 156.0,
+        padding: EdgeInsets.only(bottom: 8.0),
+        alignment: Alignment.center,
+        child: InkWell(
+            child: Text(_birthDate,
+                style: TextStyle(fontSize: 20.0, color: Color(0xFF333333))),
+            onTap: _showDialog),
+        decoration: BoxDecoration(
+            border: Border(
+          bottom: BorderSide(color: Color(0xFFCCCCCC)),
+        )),
+      ),
+    ]);
   }
 
   buildNextButton() {
     return Container(
-      height: 55.0,
+      height: 54.0,
       child: RaisedButton(
-        child: Text('下一步',
+        child: Text('继续',
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 16.0) //Theme.of(context).primaryTextTheme.headline,
             ),
         color: Color.fromARGB(255, 36, 199, 137),
         onPressed: () {
-          if (_formKey.currentState.validate()) {
-            ///只有输入的内容符合要求通过才会到达此处
-            _formKey.currentState.save();
-            Navigator.pushNamed(context, "askPage");
-          }
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> new LocationInfo(user: UserInfo())));
         },
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(

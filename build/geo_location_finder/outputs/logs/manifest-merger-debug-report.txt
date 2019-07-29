@@ -1,0 +1,31 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:1:1-7:12
+INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:2:3-51
+		INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml
+		INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:4:5-66
+	android:name
+		ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:4:22-64
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:5:22-76
+uses-feature#android.hardware.location.gps
+ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml:6:19-63
+uses-sdk
+INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml
+INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml
+		ADDED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml
+		INJECTED from D:\A_SDKs\flutter\.pub-cache\hosted\pub.flutter-io.cn\geo_location_finder-1.0.8\android\src\main\AndroidManifest.xml

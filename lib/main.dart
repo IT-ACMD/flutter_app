@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '项目标题',
-      theme: ThemeData(primaryColor: Colors.white),//设置为黑色主题
+      theme: ThemeData(primaryColor: Colors.black,accentColor: Colors.black),//设置为黑色主题
       home: LoginView(),//BottomMenu(),//这个类在，bottom_menu.dart  中定义。
       routes: <String, WidgetBuilder>{
         'loginPage': (_) => LoginView(),

@@ -112,11 +112,7 @@ class _AskPageState extends State<AskPage> {
             ),
         color: Color.fromARGB(255, 36, 199, 137),
         onPressed: () {
-          if (_formKey.currentState.validate()) {
-            ///只有输入的内容符合要求通过才会到达此处
-            _formKey.currentState.save();
             Navigator.push(context, MaterialPageRoute(builder: (context)=> new SexBirth(user: UserInfo())));
-          }
         },
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(

@@ -27,6 +27,8 @@ dependencies:
   sharesdk: ^1.1.3
   pin_input_text_field: ^1.0.1
   flutter_swiper: ^1.0.6
+  numberpicker: ^1.0.0
+  date_format: ^1.0.6
 
 dev_dependencies:
   flutter_test:
