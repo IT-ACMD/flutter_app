@@ -13,7 +13,6 @@ class _UserViewState extends State<UserView> {
       home: Scaffold(
         appBar: WAppBar(
           child: buildmytopbar(),
-          //bottom:
           backgroundColor: Colors.white,
         ),
         body: Container(

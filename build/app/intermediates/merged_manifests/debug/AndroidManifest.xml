@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.flutter_app" android:versionName="1.0.0" android:versionCode="1">
   <uses-sdk android:targetSdkVersion="28" android:minSdkVersion="16"/>
   <uses-permission android:name="android.permission.INTERNET" xmlns:android="http://schemas.android.com/apk/res/android"/>
-  <application android:debuggable="true" android:label="flutter_app" android:name="io.flutter.app.FlutterApplication" android:icon="@mipmap/ic_launcher">
+  <application android:debuggable="true" android:label="心电" android:name="io.flutter.app.FlutterApplication" android:icon="@mipmap/ic_launcher">
     <activity android:hardwareAccelerated="true" android:launchMode="singleTop" android:name="com.example.flutter_app.MainActivity" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:theme="@style/LaunchTheme" android:windowSoftInputMode="adjustResize">
       <meta-data android:name="io.flutter.app.android.SplashScreenUntilFirstFrame" android:value="true"/>
       <intent-filter xmlns:android="http://schemas.android.com/apk/res/android">

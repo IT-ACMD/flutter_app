@@ -29,6 +29,8 @@ dependencies:
   flutter_swiper: ^1.0.6
   numberpicker: ^1.0.0
   date_format: ^1.0.6
+  fl_chart: ^0.1.5
+
 
 dev_dependencies:
   flutter_test:
@@ -73,7 +75,10 @@ flutter:
     - images/warning.png
     - images/settings.png
     - images/rank_top_back.png
-
+    - images/home_ecg_image1.png
+    - images/home_ecg_image2.png
+    - images/home_ecg_image3.png
+    
     
     
 

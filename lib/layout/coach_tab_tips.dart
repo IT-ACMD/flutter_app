@@ -7,7 +7,6 @@ class TipsTabView extends StatefulWidget {
 }
 
 class _TipsTabState extends State<TipsTabView> {
-  ScrollController _controller = new ScrollController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -94,7 +93,27 @@ class _TipsTabState extends State<TipsTabView> {
                             ],
                           ),
                         ),
-                        IconButton(
+                        InkWell(
+                          child: Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Image.asset(
+                                'images/coach_up.png',
+                                color:
+                                    leftMsgs[i]['isLike'] ? Colors.green : null,
+                              )),
+                          onTap: () {
+                            if (!leftMsgs[i]['isLike']) {
+                              leftMsgs[i]['isLike'] = true;
+                              leftMsgs[i]['likeTimes'] =
+                                  (int.parse(leftMsgs[i]['likeTimes']) + 1)
+                                      .toString();
+                            }
+                            setState(() {
+                              //todo 改变图标颜色
+                            });
+                          },
+                        ),
+                        /*IconButton(
                           key: GlobalKey(),
                           icon: Image.asset(
                             'images/coach_up.png',
@@ -112,12 +131,14 @@ class _TipsTabState extends State<TipsTabView> {
                             });
                           },
                           tooltip: '点赞',
-                        ),
-                        Text(
-                          leftMsgs[i]['likeTimes'],
-                          style: TextStyle(
-                              fontSize: 10.0, color: Color(0xFF333333)),
-                        ),
+                        ),*/
+                        Padding(
+                            padding: EdgeInsets.only(right: 10.0, left: 8.0),
+                            child: Text(
+                              leftMsgs[i]['likeTimes'],
+                              style: TextStyle(
+                                  fontSize: 10.0, color: Color(0xFF333333)),
+                            )),
                       ],
                     ))
               ],
@@ -150,7 +171,7 @@ class _TipsTabState extends State<TipsTabView> {
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 6.0, 0.0, 6.0),
                     child: Row(
                       children: <Widget>[
                         ClipOval(
@@ -158,127 +179,6 @@ class _TipsTabState extends State<TipsTabView> {
                           'images/ecg_user1.png',
                           width: 26.0,
                           height: 26.0,
-                        )),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                '小熊Libra',
-                                style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Color.fromARGB(255, 51, 51, 51)),
-                              ),
-                            ],
-                          ),
-                        ),
-                        IconButton(
-                          key: GlobalKey(),
-                          icon: Image.asset(
-                            'images/coach_up.png',
-                            color: rightMsgs[i]['isLike'] ? Colors.green : null,
-                          ),
-                          onPressed: () {
-                            if (!rightMsgs[i]['isLike']) {
-                              rightMsgs[i]['isLike'] = true;
-                              rightMsgs[i]['likeTimes'] =
-                                  (int.parse(rightMsgs[i]['likeTimes']) + 1)
-                                      .toString();
-                            }
-                            setState(() {
-                              //todo 改变图标颜色
-                            });
-                          },
-                          tooltip: '点赞',
-                        ),
-                        Text(
-                          rightMsgs[i]['likeTimes'],
-                          style: TextStyle(
-                              fontSize: 10.0, color: Color(0xFF333333)),
-                        ),
-                      ],
-                    ))
-              ],
-            ));
-      }).toList(),
-    ));
-  }
-
-  /*buildLeftVideo() {
-    return Expanded(
-      child: ListView(
-          controller: _controller,
-          children: List.generate(5, (i) {
-            return Container(
-                padding: EdgeInsets.only(right: 6.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      child: Image.network(
-                        'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng08f015449fe71d759b137dbacc7a2cd8',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    Container(
-                        margin: EdgeInsets.symmetric(vertical: 12.0),
-                        child: Row(
-                          children: <Widget>[
-                            ClipOval(
-                                child: Image.asset(
-                              'images/ecg_user1.png',
-                              width: 36.0,
-                              height: 36.0,
-                            )),
-                            Padding(
-                              padding: EdgeInsets.only(left: 8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    '小熊Libra',
-                                    style: TextStyle(
-                                        fontSize: 12.0,
-                                        color: Color.fromARGB(255, 51, 51, 51)),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ))
-                  ],
-                ));
-          }).toList()),
-    );
-  }
-
-  buildRightVideo() {
-    return Expanded(
-      child: ListView(
-          controller: _controller,
-          children: List.generate(5, (i) {
-            return Container(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  child: Image.network(
-                    'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePngddea328364abf55ed756769e354fd0b9',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.symmetric(vertical: 12.0),
-                    child: Row(
-                      children: <Widget>[
-                        ClipOval(
-                            child: Image.asset(
-                          'images/ecg_user1.png',
-                          width: 36.0,
-                          height: 36.0,
                         )),
                         Padding(
                           padding: EdgeInsets.only(left: 8.0),
@@ -294,12 +194,62 @@ class _TipsTabState extends State<TipsTabView> {
                               ),
                             ],
                           ),
-                        )
+                        ),
+                        InkWell(
+                          child: Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Image.asset(
+                                'images/coach_up.png',
+                                color: rightMsgs[i]['isLike']
+                                    ? Colors.green
+                                    : null,
+                              )),
+                          onTap: () {
+                            if (!rightMsgs[i]['isLike']) {
+                              rightMsgs[i]['isLike'] = true;
+                              rightMsgs[i]['likeTimes'] =
+                                  (int.parse(rightMsgs[i]['likeTimes']) + 1)
+                                      .toString();
+                            }
+                            setState(() {
+                              //todo 改变图标颜色
+                            });
+                          },
+                        ),
+                        /*IconButton(
+                          iconSize: 9.0,
+                          key: GlobalKey(),
+                          padding: EdgeInsets.only(left: 0.0),
+                          icon: Image.asset(
+                            'images/coach_up.png',
+                            color: rightMsgs[i]['isLike'] ? Colors.green : null,
+                            //fit: BoxFit.fill,
+                          ),
+                          onPressed: () {
+                            if (!rightMsgs[i]['isLike']) {
+                              rightMsgs[i]['isLike'] = true;
+                              rightMsgs[i]['likeTimes'] =
+                                  (int.parse(rightMsgs[i]['likeTimes']) + 1)
+                                      .toString();
+                            }
+                            setState(() {
+                              //todo 改变图标颜色
+                            });
+                          },
+                          tooltip: '点赞',
+                        ),*/
+                        Padding(
+                            padding: EdgeInsets.only(right: 10.0, left: 8.0),
+                            child: Text(
+                              rightMsgs[i]['likeTimes'],
+                              style: TextStyle(
+                                  fontSize: 10.0, color: Color(0xFF333333)),
+                            )),
                       ],
                     ))
               ],
             ));
-          }).toList()),
-    );
-  }*/
+      }).toList(),
+    ));
+  }
 }

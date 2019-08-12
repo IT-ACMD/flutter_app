@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.flutter_app" android:versionName="1.0.0" android:versionCode="1">
+  <uses-sdk android:targetSdkVersion="28" android:minSdkVersion="16"/>
+  <application android:label="心电" android:name="io.flutter.app.FlutterApplication" android:icon="@mipmap/ic_launcher" xmlns:android="http://schemas.android.com/apk/res/android">
+    <activity android:hardwareAccelerated="true" android:launchMode="singleTop" android:name="com.example.flutter_app.MainActivity" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:theme="@style/LaunchTheme" android:windowSoftInputMode="adjustResize">
+      <meta-data android:name="io.flutter.app.android.SplashScreenUntilFirstFrame" android:value="true"/>
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER" xmlns:android="http://schemas.android.com/apk/res/android"/>
+      </intent-filter>
+    </activity>
+    <meta-data android:name="Mob-AppKey" android:value="2bb7e089f3bb6"/>
+    <meta-data android:name="Mob-AppSecret" android:value="0b22f2cc72018bb2a840a4460721cb1d"/>
+    <provider android:name="com.mob.MobProvider" android:exported="false" android:authorities="com.example.flutter_app.com.mob.MobProvider" android:multiprocess="true" xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <activity xmlns:tools="http://schemas.android.com/tools" android:windowSoftInputMode="stateHidden|adjustResize" android:name="com.mob.tools.MobUIShell" android:configChanges="keyboardHidden|orientation|screenSize" android:theme="@android:style/Theme.Translucent.NoTitleBar" tools:node="merge"/>
+    <activity android:launchMode="singleTask" android:name="cn.sharesdk.tencent.qq.ReceiveActivity" android:noHistory="true">
+      <intent-filter>
+        <data android:scheme="tencent100371282"/>
+        <action android:name="android.intent.action.VIEW" xmlns:android="http://schemas.android.com/apk/res/android"/>
+        <category xmlns:tools="http://schemas.android.com/tools" android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+      </intent-filter>
+    </activity>
+    <activity xmlns:tools="http://schemas.android.com/tools" android:name="cn.sharesdk.wechat.utils.WechatHandlerActivity" android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" tools:node="merge" xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <activity-alias xmlns:tools="http://schemas.android.com/tools" android:name="com.example.flutter_app.wxapi.WXEntryActivity" android:exported="true" android:targetActivity="cn.sharesdk.wechat.utils.WechatHandlerActivity" tools:node="merge"/>
+  </application>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.INTERNET" xmlns:android="http://schemas.android.com/apk/res/android"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.ACCESS_WIFI_STATE"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.ACCESS_NETWORK_STATE" xmlns:android="http://schemas.android.com/apk/res/android"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.WRITE_EXTERNAL_STORAGE" xmlns:android="http://schemas.android.com/apk/res/android"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.READ_PHONE_STATE"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.ACCESS_COARSE_LOCATION" xmlns:android="http://schemas.android.com/apk/res/android"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.PACKAGE_USAGE_STATS" xmlns:android="http://schemas.android.com/apk/res/android"/>
+  <uses-permission xmlns:tools="http://schemas.android.com/tools" android:name="android.permission.BLUETOOTH"/>
+</manifest>

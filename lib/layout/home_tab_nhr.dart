@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/homePages/ecg_signal.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:sharesdk/sharesdk_map.dart';
 
 //主页当前心率tab页面
 class RateTabView extends StatefulWidget {
-  RateTabState createState() => RateTabState();
+  var state;
+  RateTabState createState() {
+    state = RateTabState();
+    return state;
+  }
 }
 
 class RateTabState extends State<RateTabView> {
@@ -13,7 +17,13 @@ class RateTabState extends State<RateTabView> {
   //常用颜色
   var greyColor = Color.fromARGB(255, 153, 153, 153);
   var blackColor = Color.fromARGB(255, 51, 51, 51);
-
+  var selectedIndex = 1;
+  //
+  List _cardDatas = [
+    {'title': '当前心率', 'unit': 'bpm', 'value': '90', 'dateVal': '3 '},
+    {'title': '今日步数', 'unit': '步', 'value': '111212', 'dateVal': '4 '},
+    {'title': '设备电量', 'unit': '%', 'value': '87', 'dateVal': '5 '}
+  ];
   //心电知识图集
   List _knowledges = [
     {
@@ -69,7 +79,7 @@ class RateTabState extends State<RateTabView> {
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: <Widget>[
-              buildUserInfo(), //蓝牙权限
+              buildUserInfo(), //用户信息
               buildUserCard(), //用户心率卡片
               buildImageButtons(), //菜单栏
               buildImageCarousel(), //轮播
@@ -182,6 +192,8 @@ class RateTabState extends State<RateTabView> {
   }
 
   Widget buildUserCard() {
+    var item = _cardDatas[selectedIndex - 1];
+
     return ConstrainedBox(
       constraints: BoxConstraints(minHeight: 50.0, minWidth: double.infinity),
       child: Container(
@@ -204,7 +216,7 @@ class RateTabState extends State<RateTabView> {
             ),
             Positioned(
               child: Text(
-                '当前心率',
+                item['title'],
                 style: TextStyle(fontSize: 12.0, color: greyColor),
               ),
               left: 20.0,
@@ -213,7 +225,7 @@ class RateTabState extends State<RateTabView> {
             Positioned(
               child: RichText(
                 text: TextSpan(
-                    text: '90 ',
+                    text: item['value'],
                     style: TextStyle(
                       color: Color.fromARGB(255, 88, 78, 95),
                       fontSize: 60.0,
@@ -223,7 +235,7 @@ class RateTabState extends State<RateTabView> {
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                          text: 'bpm',
+                          text: item['unit'],
                           style: TextStyle(
                               color: greyColor,
                               fontSize: 15.0,
@@ -236,7 +248,7 @@ class RateTabState extends State<RateTabView> {
             Positioned(
               child: RichText(
                 text: TextSpan(
-                    text: '3 ',
+                    text: item['dateVal'],
                     style: TextStyle(
                         color: blackColor,
                         fontSize: 22.0,
@@ -264,12 +276,17 @@ class RateTabState extends State<RateTabView> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(bottom: 8.0),
-                  child: Image.asset(
-                    'images/nhr_health_report.png',
-                    fit: BoxFit.contain,
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 8.0),
+                    child: Image.asset(
+                      'images/nhr_health_report.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
+                  onTap: () {
+                    //Navigator.push(context, MaterialPageRoute(builder: new ))
+                  },
                 ),
                 Text('健康报告')
               ],
@@ -353,22 +370,30 @@ class RateTabState extends State<RateTabView> {
           children: <Widget>[
             Expanded(
                 flex: 10,
-                child: Stack(fit: StackFit.expand, children: <Widget>[
-                  Image.asset('images/ecg_info.png', fit: BoxFit.fill),
-                  Positioned(
-                    left: 15.0,
-                    top: 15.0,
-                    child: Text('心电信号',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16.0)),
-                  ),
-                  Positioned(
-                    left: 15.0,
-                    bottom: 15.0,
-                    child: Text('查看你的健康信息',
-                        style: TextStyle(fontSize: 12.0, color: greyColor)),
-                  ),
-                ])),
+                child: InkWell(
+                  child: Stack(fit: StackFit.expand, children: <Widget>[
+                    Image.asset('images/ecg_info.png', fit: BoxFit.fill),
+                    Positioned(
+                      left: 15.0,
+                      top: 15.0,
+                      child: Text('心电信号',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16.0)),
+                    ),
+                    Positioned(
+                      left: 15.0,
+                      bottom: 15.0,
+                      child: Text('查看你的健康信息',
+                          style: TextStyle(fontSize: 12.0, color: greyColor)),
+                    ),
+                  ]),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return ECGSignal();
+                    }));
+                  },
+                )),
             Container(
               width: 10,
             ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:flutter_app/data/userInfo.dart';
+import 'package:flutter_app/pages/userInfo/heightAndWeight.dart';
 
 class LocationInfo extends StatefulWidget {
   final UserInfo user;
@@ -12,14 +10,24 @@ class LocationInfo extends StatefulWidget {
 }
 
 class _LocationInfoState extends State<LocationInfo> {
+  final _formKey = GlobalKey<FormState>();
+
+  final selectedStyle = {
+    'back': Color(0xFFE4F8F1),
+    'border': Color(0xFF24C789),
+    'text': Color(0xFF24C789),
+  };
+  final defaultStyle = {
+    'back': Color(0xFFFFFFFF),
+    'border': Color(0xFFCCCCCC),
+    'text': Color(0xFF333333),
+  };
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
-  final _formKey = GlobalKey<FormState>();
-  bool isObscure = true;
   @override
   Widget build(BuildContext context) {
     //UserInfo a = widget.user;
@@ -84,22 +92,8 @@ class _LocationInfoState extends State<LocationInfo> {
     );
   }
 
-  List selectColors = [
-    {
-      'back': Color(0xFFE4F8F1),
-      'border': Color(0xFF24C789),
-      'text': Color(0xFF24C789),
-      'val': '上海市 闵行区',
-    },
-    {
-      'back': Color(0xFFFFFFFF),
-      'border': Color(0xFFCCCCCC),
-      'text': Color(0xFF333333),
-      'val': '获取当前城市',
-    }
-  ];
-
   buildGetlocation() {
+    var style = widget.user.city == null ? defaultStyle : selectedStyle;
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
       GestureDetector(
         child: Container(
@@ -108,25 +102,23 @@ class _LocationInfoState extends State<LocationInfo> {
           width: 173.0,
           alignment: Alignment.center,
           child: Text(
-            selectColors[1]['val'],
-            style: TextStyle(color: selectColors[1]['text'], fontSize: 16.0),
+            widget.user.city ?? '获取当前城市',
+            style: TextStyle(color: style['text'], fontSize: 16.0),
           ),
           decoration: BoxDecoration(
             borderRadius: new BorderRadius.all(new Radius.circular(22.0)),
-            color: selectColors[1]['back'],
-            border:
-                new Border.all(color: selectColors[1]['border'], width: 1.0),
+            color: style['back'],
+            border: new Border.all(color: style['border'], width: 1.0),
           ),
         ),
-        onTap: () {
-          setState(() {
-            var a = selectColors[0];
-            selectColors[0] = selectColors[1];
-            selectColors[1] = a;
-          });
-        },
+        onTap: _getLocation,
       )
     ]);
+  }
+
+  _getLocation() {
+    widget.user.city = '上海市 闵行区';
+    setState(() {});
   }
 
   buildNextButton() {
@@ -146,7 +138,12 @@ class _LocationInfoState extends State<LocationInfo> {
                 ),
             color: Color.fromARGB(255, 36, 199, 137),
             onPressed: () {
-              Navigator.pushNamed(context, "askPage");
+              //Navigator.pushNamed(context, "home");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          new HeightAndWeight(user: widget.user)));
             },
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(

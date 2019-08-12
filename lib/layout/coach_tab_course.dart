@@ -8,7 +8,7 @@ class CourseTabView extends StatefulWidget {
 
 class _CourseTabState extends State<CourseTabView> {
   //课程数据
-  List Courses = [
+  List _courses = [
     {
       'image':
           'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng623fa3b102da5abdd92436f32b73d00f',
@@ -56,7 +56,7 @@ class _CourseTabState extends State<CourseTabView> {
           children: <Widget>[
             Container(
               child: Image.network(
-                Courses[i]['image'],
+                _courses[i]['image'],
                 fit: BoxFit.fill,
               ),
             ),
@@ -72,7 +72,7 @@ class _CourseTabState extends State<CourseTabView> {
                         wordSpacing: 30.0),
                     children: <TextSpan>[
                       TextSpan(
-                          text: ' ${Courses[i]['population']}',
+                          text: ' ${_courses[i]['population']}',
                           children: <TextSpan>[TextSpan(text: '人已学习')])
                     ]),
               ),

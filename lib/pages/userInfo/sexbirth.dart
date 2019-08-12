@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/data/userInfo.dart';
 import 'package:flutter_app/widget/BirthdayPage.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 import 'locationInfo.dart';
 
@@ -29,9 +28,15 @@ class _SexBirthState extends State<SexBirth> {
   ];
   final _formKey = GlobalKey<FormState>();
   bool isObscure = true;
+
+  @override
+  void initState() { 
+    super.initState();
+    widget.user.birthDate = '1999年12月12日';
+  }
+
   @override
   Widget build(BuildContext context) {
-    //UserInfo a = widget.user;
     return Scaffold(
         appBar: AppBar(
           leading: buildBackButton(context),
@@ -152,12 +157,10 @@ class _SexBirthState extends State<SexBirth> {
           return BirthdayPage();
         }).then((value) {
       if (value != null) {
-        setState(() => _birthDate = value);
+        setState(() => widget.user.birthDate = value);
       }
     });
   }
-
-  String _birthDate = '1999年12月12日';
 
   buildBirthDate() {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
@@ -166,7 +169,7 @@ class _SexBirthState extends State<SexBirth> {
         padding: EdgeInsets.only(bottom: 8.0),
         alignment: Alignment.center,
         child: InkWell(
-            child: Text(_birthDate,
+            child: Text(widget.user.birthDate,
                 style: TextStyle(fontSize: 20.0, color: Color(0xFF333333))),
             onTap: _showDialog),
         decoration: BoxDecoration(
@@ -188,7 +191,10 @@ class _SexBirthState extends State<SexBirth> {
             ),
         color: Color.fromARGB(255, 36, 199, 137),
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> new LocationInfo(user: UserInfo())));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => new LocationInfo(user: widget.user)));
         },
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(

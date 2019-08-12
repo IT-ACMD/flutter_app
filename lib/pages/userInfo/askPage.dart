@@ -9,9 +9,7 @@ class AskPage extends StatefulWidget {
 
 class _AskPageState extends State<AskPage> {
   final _formKey = GlobalKey<FormState>();
-  String _email, _password, _phone;
   bool isObscure = true;
-  Color _eyeColor;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,7 +114,7 @@ class _AskPageState extends State<AskPage> {
         },
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-                28.0)), //StadiumBorder(side: BorderSide()),
+                28.0)),
       ),
     );
   }

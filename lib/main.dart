@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/UserInfo/askPage.dart';
-import 'package:flutter_app/pages/loginCode.dart';
 //引入自定义的其他页面文件
 import 'layout/BottomMenu.dart';
-import 'pages/loginView.dart';
-import 'pages/loginCode.dart';
+import 'pages/login/loginCode.dart';
+import 'pages/login/loginView.dart';
 //import 'Routes.dart';
 
 void main() => runApp(MyApp());

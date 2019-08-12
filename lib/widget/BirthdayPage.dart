@@ -1,12 +1,10 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class BirthdayPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return BirthdayPageState();
   }
 }
@@ -35,7 +33,7 @@ class BirthdayPageState extends State<BirthdayPage> {
   int _maxMonth = 12;
 
   /*当前选中月份*/
-  int _seleMonth = 1;
+  int _seleMonth = 12;
 
   /*最小日*/
   int _minDay = 1;
@@ -44,7 +42,7 @@ class BirthdayPageState extends State<BirthdayPage> {
   int _maxDay = 30;
 
   /*当前选中日*/
-  int _seleDay = 1;
+  int _seleDay = 12;
 
   /*当前年份*/
   int _currentYear = 0;
@@ -57,14 +55,12 @@ class BirthdayPageState extends State<BirthdayPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     _getCurrentDate(); //获取当前时间
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
@@ -119,6 +115,7 @@ class BirthdayPageState extends State<BirthdayPage> {
                     minValue: _minMonth,
                     maxValue: _maxMonth,
                     lastStr: "月",
+                    infiniteLoop: true,
                     onChanged: (n) {
                       _numChanged(n, NUM_TYPE.NUM_TYPE_MONTH);
                     }),
@@ -127,6 +124,7 @@ class BirthdayPageState extends State<BirthdayPage> {
                     minValue: _minDay,
                     maxValue: _maxDay,
                     lastStr: "日",
+                    infiniteLoop: true,
                     onChanged: (n) {
                       _numChanged(n, NUM_TYPE.NUM_TYPE_DAY);
                     })
@@ -139,7 +137,7 @@ class BirthdayPageState extends State<BirthdayPage> {
             child: FlatButton(
                 color: Color(0xFF24C789),
                 onPressed: () {
-                  Navigator.of(context).pop('${_seleYear}年${_seleMonth}月${_seleDay}日');
+                  Navigator.of(context).pop('$_seleYear年$_seleMonth月$_seleDay日');
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(24))),
@@ -189,7 +187,7 @@ class BirthdayPageState extends State<BirthdayPage> {
           //如果当前选择的不是当前年份
           _maxMonth = 12;
           //根据年点年份月份获取当前月天数
-          _maxDay = getDaysNum(_seleYear, _seleMonth);
+          _maxDay = ECdate.getDaysNum(_seleYear, _seleMonth);
           if (_seleDay > _maxDay) {
             //如果当前选中日大于当前日
             _seleDay = _maxDay;
@@ -201,7 +199,7 @@ class BirthdayPageState extends State<BirthdayPage> {
         if (_seleMonth == _currentMonth && _seleYear == _currentYear) {
           _maxDay = _currentDay;
         } else {
-          _maxDay = getDaysNum(_seleYear, _seleMonth);
+          _maxDay = ECdate.getDaysNum(_seleYear, _seleMonth);
         }
         if (_seleDay > _maxDay) {
           //如果当前选中日大于当前日
@@ -211,51 +209,20 @@ class BirthdayPageState extends State<BirthdayPage> {
         //选择日
         _seleDay = newNum;
       }
-
-      //_babyAge = _currentYear-_seleYear+1;
-      //if(_seleMonth>_currentMonth){
-      //_babyAge-=1;
-      //}else if(_seleMonth==_currentMonth){
-      //if(_seleDay>_currentDay){
-      //_babyAge-=1;
-      //}
-      //}
     });
   }
 
   /*获取当前时间*/
   void _getCurrentDate() {
-    _currentYear = int.parse(formatDate(DateTime.now(), [yyyy]));
+    DateTime date = DateTime.now();
+    _currentYear = int.parse(formatDate(date, [yyyy]));
     _maxYear = _currentYear;
-    _currentMonth = int.parse(formatDate(DateTime.now(), [mm]));
-    _currentDay = int.parse(formatDate(DateTime.now(), [dd]));
+    _currentMonth = int.parse(formatDate(date, [mm]));
+    _currentDay = int.parse(formatDate(date, [dd]));
 
     setState(() {
-      //_seleYear = _currentYear;
-      //_seleMonth = _currentMonth;
-      //_seleDay = _currentDay;
-      _maxYear = _currentYear;
-      _maxMonth = _currentMonth;
-      _maxDay = _currentDay;
     });
-
-    print("当前时间：${_currentYear}-${_currentMonth}-${_currentDay}");
   }
 
-  /*根据年份月份获取当前月有多少天*/
-  int getDaysNum(int y, int m) {
-    if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) {
-      return 31;
-    } else if (m == 2) {
-      if (((y % 4 == 0) && (y % 100 != 0)) || (y % 400 == 0)) {
-        //闰年 2月29
-        return 29;
-      } else {
-        //平年 2月28
-        return 28;
-      }
-    } else {
-      return 30;
-    }
-  }
+  
 }

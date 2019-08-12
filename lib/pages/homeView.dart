@@ -1,20 +1,16 @@
 //这是HomeView类的控制页
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_app/layout/home_tab_ecg.dart';
 import '../widget/ecg_title_bar.dart';
-import '../layout/home_tab_ecg.dart';
-import '../layout/home_tab_ecp.dart';
 import '../layout/home_tab_nhr.dart';
-import '../layout/home_tab_nstep.dart';
-import 'package:flutter_app/pages/searchView.dart';
+import 'homePages/searchView.dart';
 
 class HomeView extends StatefulWidget {
   _SearchBarDemoState createState() => _SearchBarDemoState();
 }
 
-class _SearchBarDemoState extends State<HomeView> {
+class _SearchBarDemoState extends State<HomeView>
+    with SingleTickerProviderStateMixin {
   // final Widget child;
   // HomeView({Key key, this.child}) : super(key: key);
 
@@ -25,6 +21,16 @@ class _SearchBarDemoState extends State<HomeView> {
     const Choice(title: '设备电量'),
   ];
 
+  RateTabView _bodyView;
+  TabController _controller;
+  @override
+  void initState() {
+    super.initState();
+    _bodyView = RateTabView();
+    _controller = TabController(length: choices.length, vsync: this);
+    _controller.index = 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,12 +40,8 @@ class _SearchBarDemoState extends State<HomeView> {
         child: new Scaffold(
           appBar: new WAppBar(
             child: buildSearchBar(),
-            /*new ECGTitleBar(
-              '心电',
-              iconData: Icons.textsms,
-              needRightLocalIcon: true,
-            ),*/
             bottom: new TabBar(
+              controller: _controller,
               isScrollable: true,
               indicator: UnderlineTabIndicator(
                 borderSide: BorderSide(
@@ -54,22 +56,35 @@ class _SearchBarDemoState extends State<HomeView> {
                 );
               }).toList(),
               labelColor: Colors.black,
+              onTap: (i) {
+                if (i == 0) {
+                  _controller.index = _controller.previousIndex;
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return ECGPage();
+                  }));
+                } else {
+                  _bodyView.state.selectedIndex = i;
+                  _bodyView.state.setState(() {});
+                }
+              },
             ),
             backgroundColor: Colors.white,
           ),
-          body: new TabBarView(
+          body:
+              _bodyView, /*new TabBarView(
             children: <Widget>[
               ECGTabView(),
               RateTabView(),
               StepTabView(),
               ECPTabView(),
             ],
-          ),
+          ),*/
         ),
       ),
     );
   }
-  
+
   //InkWell,
   //GestureDetector
 
@@ -106,7 +121,11 @@ class _SearchBarDemoState extends State<HomeView> {
                     borderRadius: BorderRadius.all(Radius.circular(22.0))),
               ),
             ),
-            Image.asset('images/message.png',height: 19.0,width: 20.0,)
+            Image.asset(
+              'images/message.png',
+              height: 19.0,
+              width: 20.0,
+            )
           ],
         ));
   }

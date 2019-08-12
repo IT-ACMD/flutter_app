@@ -22,7 +22,7 @@ class _RankViewState extends State<RankView> {
         appBar: WAppBar(
           child: buildmytopbar(),
           bottom: TabBar(
-            labelPadding: EdgeInsets.symmetric(horizontal: 80.0),
+            //labelPadding: EdgeInsets.symmetric(horizontal: 80.0),
             labelStyle: TextStyle(
                 fontSize: 16.0,
                 color: Color.fromARGB(255, 51, 51, 51),
@@ -34,7 +34,7 @@ class _RankViewState extends State<RankView> {
                 width: 2.0,
               ),
             ),
-            isScrollable: true,
+            //isScrollable: true,
             tabs: tabNames.map((e) {
               return Tab(
                 text: e,
