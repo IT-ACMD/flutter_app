@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/homePages/course%20_loss_weight.dart';
 import 'package:flutter_app/pages/homePages/ecg_signal.dart';
+import 'package:flutter_app/pages/homePages/record_weight.dart';
+import 'package:flutter_app/pages/homePages/report_health.dart';
+import 'package:flutter_app/pages/homePages/search_coach.dart';
+import 'package:flutter_app/pages/homePages/share_data.dart';
+import 'package:flutter_app/pages/homePages/warning_fore.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 //主页当前心率tab页面
 class RateTabView extends StatefulWidget {
   var state;
+  var parentContext;
+  RateTabView(this.parentContext);
   RateTabState createState() {
     state = RateTabState();
     return state;
@@ -71,42 +79,44 @@ class RateTabState extends State<RateTabView> {
   //构造方法
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        isVisible ? buildBluetooth() : Container(), //权限title
-        Container(
-          height: 1200.0,
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: <Widget>[
-              buildUserInfo(), //用户信息
-              buildUserCard(), //用户心率卡片
-              buildImageButtons(), //菜单栏
-              buildImageCarousel(), //轮播
-              buildUserInfoImage(), //用户健康信息
-              buildKnowledgebutton('心电知识', '心得知识页面'), //心电知识按钮
-              buildKnowledgeDynamic(), //心电知识文章推送
-              Container(height: 12.0),
-              buildKnowledgebutton('心得分享', '心得分享页面'), //心得分享按钮
-              buildHeartGet(), //心得分享
-              buildFindCoach2you(),
-              //buildEndHint(),
-            ],
+    return Column(children: <Widget>[
+      isVisible ? buildBluetooth() : SizedBox(), //权限title
+      Expanded(
+          child: ListView(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: <Widget>[
+                buildUserInfo(), //用户信息
+                buildUserCard(), //用户心率卡片
+                buildImageButtons(), //菜单栏
+                buildImageCarousel(), //轮播
+                buildUserInfoImage(), //用户健康信息
+                buildKnowledgebutton('心电知识', '心得知识页面'), //心电知识按钮
+                buildKnowledgeDynamic(), //心电知识文章推送
+                Container(height: 12.0),
+                buildKnowledgebutton('心得分享', '心得分享页面'), //心得分享按钮
+                buildHeartGet(), //心得分享
+                buildFindCoach2you(),
+                //buildEndHint(),
+              ],
+            ),
           ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 20.0),
-          height: 180.0,
-          alignment: Alignment.topCenter,
-          color: Color.fromARGB(255, 244, 244, 244),
-          child: Text(
-            '一没有更多内容一',
-            style: TextStyle(
-                fontSize: 11.0, color: Color.fromARGB(255, 189, 189, 189)),
-          ),
-        )
-      ],
-    );
+          Container(
+            padding: EdgeInsets.only(top: 20.0),
+            height: 180.0,
+            alignment: Alignment.topCenter,
+            color: Color.fromARGB(255, 244, 244, 244),
+            child: Text(
+              '一没有更多内容一',
+              style: TextStyle(
+                  fontSize: 11.0, color: Color.fromARGB(255, 189, 189, 189)),
+            ),
+          )
+        ],
+      ))
+    ]);
   }
 
   //蓝牙权限控件
@@ -139,7 +149,11 @@ class RateTabState extends State<RateTabView> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(22.0)),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      isVisible = !isVisible;
+                    });
+                  },
                 ))
           ],
         ));
@@ -152,8 +166,8 @@ class RateTabState extends State<RateTabView> {
         child: Row(
           children: <Widget>[
             ClipOval(
-                child: Image.network(
-              "https://profile.csdnimg.cn/9/2/0/1_qq_42181602",
+                child: Image.asset(
+              "images/user_head.png",
               width: 55,
               height: 55,
             )),
@@ -285,7 +299,10 @@ class RateTabState extends State<RateTabView> {
                     ),
                   ),
                   onTap: () {
-                    //Navigator.push(context, MaterialPageRoute(builder: new ))
+                    Navigator.push(widget.parentContext,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return HealthReport();
+                    }));
                   },
                 ),
                 Text('健康报告')
@@ -293,27 +310,51 @@ class RateTabState extends State<RateTabView> {
             ),
             Column(
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: Image.asset('images/nhr_weight_records.png'),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: Image.asset('images/nhr_weight_records.png'),
+                  ),
+                  onTap: () {
+                    Navigator.push(widget.parentContext,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return RecordWeight();
+                    }));
+                  },
                 ),
                 Text('体重记录')
               ],
             ),
             Column(
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: Image.asset('images/nhr_lose_plan.png'),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: Image.asset('images/nhr_lose_plan.png'),
+                  ),
+                  onTap: () {
+                    Navigator.push(widget.parentContext,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return LWCourse();
+                    }));
+                  },
                 ),
                 Text('减肥课程')
               ],
             ),
             Column(
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(bottom: 10.0),
-                  child: Image.asset('images/nhr_share.png'),
+                InkWell(
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 10.0),
+                    child: Image.asset('images/nhr_share.png'),
+                  ),
+                  onTap: () {
+                    Navigator.push(widget.parentContext,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return ShareData();
+                    }));
+                  },
                 ),
                 Text('分享记录')
               ],
@@ -399,22 +440,30 @@ class RateTabState extends State<RateTabView> {
             ),
             Expanded(
                 flex: 10,
-                child: Stack(fit: StackFit.expand, children: <Widget>[
-                  Image.asset('images/warning_info.png', fit: BoxFit.fill),
-                  Positioned(
-                    left: 15.0,
-                    top: 15.0,
-                    child: Text('预警信息',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16.0)),
-                  ),
-                  Positioned(
-                    left: 15.0,
-                    bottom: 15.0,
-                    child: Text('查看你的健康信息',
-                        style: TextStyle(fontSize: 12.0, color: greyColor)),
-                  ),
-                ])),
+                child: InkWell(
+                  child: Stack(fit: StackFit.expand, children: <Widget>[
+                    Image.asset('images/warning_info.png', fit: BoxFit.fill),
+                    Positioned(
+                      left: 15.0,
+                      top: 15.0,
+                      child: Text('预警信息',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16.0)),
+                    ),
+                    Positioned(
+                      left: 15.0,
+                      bottom: 15.0,
+                      child: Text('查看你的健康信息',
+                          style: TextStyle(fontSize: 12.0, color: greyColor)),
+                    ),
+                  ]),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return WarningFore();
+                    }));
+                  },
+                )),
           ],
         ));
   }
@@ -597,7 +646,12 @@ class RateTabState extends State<RateTabView> {
                     color: Color.fromARGB(255, 36, 199, 137),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(22.0)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return SearchCoach();
+                      }));
+                    },
                   )),
             )
           ],

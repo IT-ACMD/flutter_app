@@ -1,15 +1,22 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/data/dataCenter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
 class LoginCode extends StatefulWidget {
+  String _phone;
+  LoginCode(phone) {
+    _phone = phone;
+  }
   @override
   _LoginCodeState createState() => _LoginCodeState();
 }
 
 class _LoginCodeState extends State<LoginCode> {
   final _formKey = GlobalKey<FormState>();
-  String _password;
+  String _password, _phone;
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -108,16 +115,21 @@ class _LoginCodeState extends State<LoginCode> {
                   fontSize: 16.0) //Theme.of(context).primaryTextTheme.headline,
               ),
           color: Color.fromARGB(255, 36, 199, 137),
-          onPressed: () {
+          onPressed: () async {
             if (_formKey.currentState.validate()) {
               ///只有输入的内容符合要求通过才会到达此处
               _formKey.currentState.save();
               //= 执行登录方法
-              if (_password == '9527') {
+              var url = 'authentication/mobile';
+              String result =
+                  await ECHttp.postData(url, widget._phone, _password);
+              if (result.length > 0) {
+                var object = json.decode(result);
+                eUserInfo.access_token = object['access_token'];
+                //Navigator.pushNamed(context, "askPage");
                 Navigator.pushNamed(context, 'home');
-              } else {
-                Navigator.pushNamed(context, "askPage");
               }
+              //Navigator.pushNamed(context, "askPage");
             }
           },
           shape: RoundedRectangleBorder(
@@ -171,7 +183,7 @@ class _LoginCodeState extends State<LoginCode> {
         _password = value;
         print(value);
       },
-      onChanged: (val){
+      onChanged: (val) {
         _password = val;
       },
     );

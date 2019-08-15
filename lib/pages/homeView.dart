@@ -26,7 +26,7 @@ class _SearchBarDemoState extends State<HomeView>
   @override
   void initState() {
     super.initState();
-    _bodyView = RateTabView();
+    _bodyView = RateTabView(context);
     _controller = TabController(length: choices.length, vsync: this);
     _controller.index = 1;
   }
@@ -160,33 +160,3 @@ class ChoiceCard extends StatelessWidget {
     );
   }
 }
-
-//异步请求数据
-/*getData() async{
-    var url = 'https://jsonplaceholder.typicode.com/posts';
-    var httpClient = new HttpClient();
-
-    var result;
-    try{
-      var request = await httpClient.getUrl(Uri.parse(url));
-      var response = await request.close();
-      if(response.statusCode == HttpStatus.ok){
-        var json = await response.transform(utf8.decoder).join();
-        result = jsonDecode(json);
-      }
-      else
-      {
-        result = 'Error getting json data:\nHttp status ${response.statusCode}';
-      }
-    }
-    catch (exception) {
-      result = 'Faild getting json data';
-    }
-
-    if(!mounted)return;
-    
-    setState((){
-      data = result;
-    });
-
-  }*/

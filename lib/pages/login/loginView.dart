@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/login/loginCode.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sharesdk/sharesdk.dart';
 
@@ -8,20 +9,19 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   final _formKey = GlobalKey<FormState>();
   String _email, _password, _phone;
   bool isObscure = true;
   Color _eyeColor;
   List _loginMethod = [
     {
-
       'title': "微信",
-      'icon': 'images/3.0x/WX.png',//Image.asset('images/QQ.png'),//ImageIcon(AssetImage("assets/images/微信.png")),
+      'icon':
+          'images/3.0x/WX.png', //Image.asset('images/QQ.png'),//ImageIcon(AssetImage("assets/images/微信.png")),
     },
     {
       'title': "QQ",
-      'icon': 'images/QQ.png',//ImageIcon(AssetImage("images/QQ.png"))
+      'icon': 'images/QQ.png', //ImageIcon(AssetImage("images/QQ.png"))
     }
   ];
   @override
@@ -31,7 +31,9 @@ class _LoginViewState extends State<LoginView> {
     //设置宽750 高1334，根据系统字体进行缩放
     //ScreenUtil.instance = ScreenUtil(width: 1080, height: 1920, allowFontScaling: true)..init(context);
     return Scaffold(
-      body: Material(color: Color.fromARGB(255, 82, 77, 85), child: Form(
+        body: Material(
+      color: Color.fromARGB(255, 82, 77, 85),
+      child: Form(
         key: _formKey,
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 35.0),
@@ -50,56 +52,51 @@ class _LoginViewState extends State<LoginView> {
             buildLoginButton(context),
             SizedBox(height: 10.0),
             buildUserProtocolText(),
-            SizedBox(height: 150.0,),
+            SizedBox(
+              height: 150.0,
+            ),
             buildOtherText(context),
             buildOtherMethod(context),
             //buildRegisterText(context),
           ],
         ),
       ),
-      )
-    );
+    ));
   }
 
-  Widget buildOtherText(BuildContext context)
-  {
+  Widget buildOtherText(BuildContext context) {
     return Align(
       alignment: Alignment.center,
       child: Text(
         '其他登陆方式',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 12.0
-        ),
+        style: TextStyle(color: Colors.white, fontSize: 12.0),
       ),
     );
   }
 
-  Align buildRegisterText(BuildContext context)
-  {
+  Align buildRegisterText(BuildContext context) {
     return Align(
-      alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("没有账号？"),
-            GestureDetector(
-              child: Text(
-                "点击注册",
-                style: TextStyle(color: Colors.green),
-              ),
-              onTap: (){
-                //TODO跳转到注册页面
-                print("去注册");
-                Navigator.pop(context);
-              },
-            )
-          ],
-        ),
-      )
-    );
+        alignment: Alignment.center,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("没有账号？"),
+              GestureDetector(
+                child: Text(
+                  "点击注册",
+                  style: TextStyle(color: Colors.green),
+                ),
+                onTap: () {
+                  //TODO跳转到注册页面
+                  print("去注册");
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          ),
+        ));
   }
 
   ButtonBar buildOtherMethod(BuildContext context) {
@@ -107,40 +104,44 @@ class _LoginViewState extends State<LoginView> {
       alignment: MainAxisAlignment.spaceEvenly,
       children: _loginMethod
           .map((item) => Builder(
-        builder: (context) {
-          return Listener(
-            child: IconButton(
-              //icon: ImageIcon(AssetImage('images/QQ.png'),color: Color.fromARGB(0, 0, 0, 0)),//item['icon'],
-                  //color: Theme.of(context).iconTheme.color),
-              icon: Image.asset(item['icon']),//ImageIcon(AssetImage('images/QQ.png')),
-              iconSize: 50.0,
-              onPressed: () {
-                //TODO : 第三方登录方法
-                Scaffold.of(context).showSnackBar(new SnackBar(
-                  content: new Text("${item['title']}登录"),
-                  action: new SnackBarAction(
-                    label: "取消",
-                    onPressed: () {},
-                  ),
-                ));
-              }),
-            onPointerUp: (PointerUpEvent event) {
-              ShareSDKPlatform sharePlat =  item['title'] == '微信' ? ShareSDKPlatforms.wechatTimeline : ShareSDKPlatforms.qq;
-              ShareSDK.auth(sharePlat, null, (SSDKResponseState state, Map user, SSDKError error){
-                   //showAlert(state, user != null ? user:error.rawData, context);
-                print("error is $error");
-              });
-              //TODO : 第三方登录方法
-                /*Scaffold.of(context).showSnackBar(new SnackBar(
+                builder: (context) {
+                  return Listener(
+                    child: IconButton(
+                        //icon: ImageIcon(AssetImage('images/QQ.png'),color: Color.fromARGB(0, 0, 0, 0)),//item['icon'],
+                        //color: Theme.of(context).iconTheme.color),
+                        icon: Image.asset(item[
+                            'icon']), //ImageIcon(AssetImage('images/QQ.png')),
+                        iconSize: 50.0,
+                        onPressed: () {
+                          //TODO : 第三方登录方法
+                          Scaffold.of(context).showSnackBar(new SnackBar(
+                            content: new Text("${item['title']}登录"),
+                            action: new SnackBarAction(
+                              label: "取消",
+                              onPressed: () {},
+                            ),
+                          ));
+                        }),
+                    onPointerUp: (PointerUpEvent event) {
+                      ShareSDKPlatform sharePlat = item['title'] == '微信'
+                          ? ShareSDKPlatforms.wechatTimeline
+                          : ShareSDKPlatforms.qq;
+                      ShareSDK.auth(sharePlat, null,
+                          (SSDKResponseState state, Map user, SSDKError error) {
+                        //showAlert(state, user != null ? user:error.rawData, context);
+                        print("error is $error");
+                      });
+                      //TODO : 第三方登录方法
+                      /*Scaffold.of(context).showSnackBar(new SnackBar(
                   content: new Text("${item['title']}登录"),
                   action: new SnackBarAction(
                     label: "取消",
                     onPressed: () {},
                   ),
                 ));*/
-            },
-          );
-          /*return IconButton(
+                    },
+                  );
+                  /*return IconButton(
               //icon: ImageIcon(AssetImage('images/QQ.png'),color: Color.fromARGB(0, 0, 0, 0)),//item['icon'],
                   //color: Theme.of(context).iconTheme.color),
               icon: ImageIcon(AssetImage('images/QQ.png')),//Image.asset(item['icon']),
@@ -155,70 +156,74 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ));
               });*/
-        },
-      )).toList(),
+                },
+              ))
+          .toList(),
     );
   }
 
   DefaultTextStyle buildUserProtocolText() {
     return DefaultTextStyle(
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 11.0
-        ),
+        style: TextStyle(color: Colors.white, fontSize: 11.0),
         textAlign: TextAlign.left,
-        child: Text.rich(TextSpan(
-          children: <TextSpan> [
-            TextSpan(
-              text: '注册即同意 心电 ',
+        child: Text.rich(TextSpan(children: <TextSpan>[
+          TextSpan(
+            text: '注册即同意 心电 ',
+          ),
+          TextSpan(
+            text: '用户协议',
+            style: TextStyle(
+              decoration: TextDecoration.underline,
+              decorationColor: Colors.white,
             ),
-            TextSpan(
-              text: '用户协议',
-              style: TextStyle(
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.white,
-              ),
+          ),
+          TextSpan(
+            text: ' 和 ',
+          ),
+          TextSpan(
+            text: '隐私政策',
+            style: TextStyle(
+              color: Colors.white,
+              decoration: TextDecoration.underline,
+              decorationColor: Colors.white,
             ),
-            TextSpan(
-              text: ' 和 ',
-            ),
-            TextSpan(
-              text: '隐私政策',
-              style: TextStyle(
-                color: Colors.white,
-                decoration: TextDecoration.underline,
-                decorationColor: Colors.white,
-              ),
-            )
-          ]
-        )
-          //'    ',
-          //style: TextStyle(color: Colors.white, fontSize: 11.0),
-        )
-      );
+          )
+        ])
+            //'    ',
+            //style: TextStyle(color: Colors.white, fontSize: 11.0),
+            ));
   }
 
   Align buildLoginButton(BuildContext context) {
     return Align(
       child: SizedBox(
         height: ScreenUtil().setHeight(140.0), //45 * 420/160
-        width: ScreenUtil().setWidth(870.0),  //270 * 420/160
+        width: ScreenUtil().setWidth(870.0), //270 * 420/160
         child: RaisedButton(
-          child: Text(
-            '获取验证码',
-            style: TextStyle(color: Colors.white, fontSize: 16.0)//Theme.of(context).primaryTextTheme.headline,
-          ),
+          child: Text('获取验证码',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0) //Theme.of(context).primaryTextTheme.headline,
+              ),
           color: Color.fromARGB(255, 36, 199, 137),
-          onPressed: () {
+          onPressed: () async {
             if (_formKey.currentState.validate()) {
               ///只有输入的内容符合要求通过才会到达此处
               _formKey.currentState.save();
+              var url =
+                  'code/sms?mobile=$_phone';
+              String result = await ECHttp.getData(url);
               //= 执行登录方法
-              Navigator.pushNamed(context, "loginCode");
-              //Navigator.pushNamed(context, "home");
+              if (result == 'ok')
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                  return LoginCode(_phone);
+                }));
             }
           },
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),//StadiumBorder(side: BorderSide()),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                  24.0)), //StadiumBorder(side: BorderSide()),
         ),
       ),
     );
@@ -306,9 +311,9 @@ class _LoginViewState extends State<LoginView> {
         onSaved: (String value) => _phone = value,
       ),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: Colors.white30),)
-      ),
-
+          border: Border(
+        bottom: BorderSide(color: Colors.white30),
+      )),
     );
   }
 
@@ -331,12 +336,9 @@ class _LoginViewState extends State<LoginView> {
       padding: EdgeInsets.only(top: 40.0),
       child: Text(
         '手机号登录',
-        style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white),
+        style: TextStyle(
+            fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white),
       ),
     );
   }
-
-
 }
-
-

@@ -76,3 +76,4 @@ class SearchBarDelegate extends SearchDelegate<String> {
 
 const recentSuggest = ["我的心率","中国人的平均寿命","特朗普年龄","心率下降"]; //最近搜索 或 推荐搜索
 const searchList = ["教练","课程","活动","咨询"];  //查找词库
+final recentSuggestf = ["我的心率","中国人的平均寿命","特朗普年龄","心率下降"]; //最近搜索 或 推荐搜索

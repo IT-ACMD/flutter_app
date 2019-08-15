@@ -1,4 +1,7 @@
-class UserInfo {
+//用户信息数据
+class UserInfo{
+
+  String access_token;
   String sex; //性别
   String birthDate; //出生日期
   String city; //所在城市
@@ -14,5 +17,6 @@ class UserInfo {
       this.height,
       this.weight,
       this.lifeStyle,
-      this.historyIll]);
+      this.historyIll,
+      this.access_token]);
 }
