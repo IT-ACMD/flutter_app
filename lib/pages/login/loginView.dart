@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/data/dataCenter.dart';
 import 'package:flutter_app/pages/login/loginCode.dart';
+import 'package:flutter_app/tools/ECHttp.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sharesdk/sharesdk.dart';
 
@@ -24,6 +26,28 @@ class _LoginViewState extends State<LoginView> {
       'icon': 'images/QQ.png', //ImageIcon(AssetImage("images/QQ.png"))
     }
   ];
+
+  TextEditingController _controller = new TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    ShareSDKRegister register = ShareSDKRegister();
+    register.setupWechat(
+        "wx617c77c82218ea2c", "c7253e5289986cf4c4c74d1ccc185fb1");
+    register.setupQQ("100371282", "aed9b0303e3ed1e27bae87c33761161d");
+    //注册
+    ShareSDK.regist(register);
+    _controller.addListener(onChange);
+  }
+
+  void onChange() {
+    String text = _controller.text;
+    _phone = text;
+    eUserInfo.phone = text;
+  }
+
   @override
   Widget build(BuildContext context) {
     //默认设置宽度1080px, 高度1920px
@@ -123,39 +147,11 @@ class _LoginViewState extends State<LoginView> {
                           ));
                         }),
                     onPointerUp: (PointerUpEvent event) {
-                      ShareSDKPlatform sharePlat = item['title'] == '微信'
-                          ? ShareSDKPlatforms.wechatTimeline
-                          : ShareSDKPlatforms.qq;
-                      ShareSDK.auth(sharePlat, null,
-                          (SSDKResponseState state, Map user, SSDKError error) {
-                        //showAlert(state, user != null ? user:error.rawData, context);
-                        print("error is $error");
-                      });
-                      //TODO : 第三方登录方法
-                      /*Scaffold.of(context).showSnackBar(new SnackBar(
-                  content: new Text("${item['title']}登录"),
-                  action: new SnackBarAction(
-                    label: "取消",
-                    onPressed: () {},
-                  ),
-                ));*/
+                      item['title'] == '微信'
+                          ? authToWechat(context)
+                          : authToQQ(context);
                     },
                   );
-                  /*return IconButton(
-              //icon: ImageIcon(AssetImage('images/QQ.png'),color: Color.fromARGB(0, 0, 0, 0)),//item['icon'],
-                  //color: Theme.of(context).iconTheme.color),
-              icon: ImageIcon(AssetImage('images/QQ.png')),//Image.asset(item['icon']),
-              iconSize: 50.0,
-              onPressed: () {
-                //TODO : 第三方登录方法
-                Scaffold.of(context).showSnackBar(new SnackBar(
-                  content: new Text("${item['title']}登录"),
-                  action: new SnackBarAction(
-                    label: "取消",
-                    onPressed: () {},
-                  ),
-                ));
-              });*/
                 },
               ))
           .toList(),
@@ -209,16 +205,25 @@ class _LoginViewState extends State<LoginView> {
           onPressed: () async {
             if (_formKey.currentState.validate()) {
               ///只有输入的内容符合要求通过才会到达此处
-              _formKey.currentState.save();
-              var url =
-                  'code/sms?mobile=$_phone';
-              String result = await ECHttp.getData(url);
-              //= 执行登录方法
-              if (result == 'ok')
+              //_formKey.currentState.save();
+              if (eIsTest) {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
                   return LoginCode(_phone);
                 }));
+              } else {
+                var url = 'code/sms?mobile=$_phone';
+                List hears = [
+                  {'name': 'deviceId', 'value': '008'}
+                ];
+                String result = await ECHttp.getData(url, hears);
+                //= 执行登录方法
+                if (result != null)
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return LoginCode(_phone);
+                  }));
+              }
             }
           },
           shape: RoundedRectangleBorder(
@@ -295,6 +300,7 @@ class _LoginViewState extends State<LoginView> {
   Container buildPhoneTextField() {
     return Container(
       child: TextFormField(
+        controller: _controller,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           hintText: '请输入手机号',
@@ -308,7 +314,6 @@ class _LoginViewState extends State<LoginView> {
             return '请输入正确的手机号';
           }*/
         },
-        onSaved: (String value) => _phone = value,
       ),
       decoration: BoxDecoration(
           border: Border(
@@ -340,5 +345,46 @@ class _LoginViewState extends State<LoginView> {
             fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.white),
       ),
     );
+  }
+
+  void authToWechat(BuildContext context) {
+    ShareSDK.auth(ShareSDKPlatforms.wechatSession, null,
+        (SSDKResponseState state, Map user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
+
+  void getUserInfoToWechat(BuildContext context) {
+    ShareSDK.getUserInfo(
+        ShareSDKPlatforms.wechatSession, (SSDKResponseState state,
+        Map user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
+
+  void authToQQ(BuildContext context) {
+    ShareSDK.auth(ShareSDKPlatforms.qq, null,
+        (SSDKResponseState state, Map user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
+
+  void showAlert(SSDKResponseState state, Map content, BuildContext context) {
+    print("--------------------------> state:" + state.toString());
+    String title = "失败";
+    switch (state) {
+      case SSDKResponseState.Success:
+        title = "成功";
+        break;
+      case SSDKResponseState.Fail:
+        title = "失败";
+        break;
+      case SSDKResponseState.Cancel:
+        title = "取消";
+        break;
+      default:
+        title = state.toString();
+        break;
+    }
   }
 }

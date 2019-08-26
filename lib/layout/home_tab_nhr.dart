@@ -29,7 +29,7 @@ class RateTabState extends State<RateTabView> {
   //
   List _cardDatas = [
     {'title': '当前心率', 'unit': 'bpm', 'value': '90', 'dateVal': '3 '},
-    {'title': '今日步数', 'unit': '步', 'value': '111212', 'dateVal': '4 '},
+    {'title': '今日步数', 'unit': '步', 'value': '9527', 'dateVal': '4 '},
     {'title': '设备电量', 'unit': '%', 'value': '87', 'dateVal': '5 '}
   ];
   //心电知识图集

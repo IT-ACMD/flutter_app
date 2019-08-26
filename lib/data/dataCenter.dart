@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter_app/data/userInfo.dart';
 
 import 'coachData.dart';
 import 'recordWeight.dart';
 
+//是否测试
+final eIsTest = false;
 //用户信息
-final eUserInfo = UserInfo();
+final eUserInfo = UserInfo('爱吃蓝莓的凡','女','2001-01-01','上海市、浦东区');
 //用户体重记录
 final List<RecordWeightData> eRecordData = [];
 //历史预警信息
@@ -24,3 +28,15 @@ final eCoachList = [
   CoachInfo('小熊Libra', 'images/ecg_user1.png', 284, 521),
   CoachInfo('小熊Libra', 'images/ecg_user1.png', 284, 521)
 ];
+
+String getToken(){
+  if(eUserInfo != null && eUserInfo.accessToken != null)
+  {
+    return 'bearer ${eUserInfo.accessToken}';
+  }
+  else
+  {
+    return 'Basic ${base64Encode(utf8.encode('fuhk:fuhksecret'))}';
+  }
+  
+}

@@ -49,7 +49,7 @@ class _TipsTabState extends State<TipsTabView> {
   buildLeftVideo() {
     return Expanded(
         child: Column(
-      children: List.generate(5, (i) {
+      children: List.generate(6, (i) {
         return Container(
             padding: EdgeInsets.only(right: 3.0),
             child: Column(
@@ -79,7 +79,7 @@ class _TipsTabState extends State<TipsTabView> {
                           height: 26.0,
                         )),
                         Padding(
-                          padding: EdgeInsets.only(left: 8.0),
+                          padding: EdgeInsets.only(left: 6.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,58 +87,46 @@ class _TipsTabState extends State<TipsTabView> {
                               Text(
                                 '小熊Libra',
                                 style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Color.fromARGB(255, 51, 51, 51)),
+                                    fontSize: 10.0, color: Color(0xff333333)),
                               ),
                             ],
                           ),
                         ),
-                        InkWell(
-                          child: Padding(
-                              padding: EdgeInsets.only(left: 20.0),
-                              child: Image.asset(
-                                'images/coach_up.png',
-                                color:
-                                    leftMsgs[i]['isLike'] ? Colors.green : null,
-                              )),
-                          onTap: () {
-                            if (!leftMsgs[i]['isLike']) {
-                              leftMsgs[i]['isLike'] = true;
-                              leftMsgs[i]['likeTimes'] =
-                                  (int.parse(leftMsgs[i]['likeTimes']) + 1)
-                                      .toString();
-                            }
-                            setState(() {
-                              //todo 改变图标颜色
-                            });
-                          },
-                        ),
-                        /*IconButton(
-                          key: GlobalKey(),
-                          icon: Image.asset(
-                            'images/coach_up.png',
-                            color: leftMsgs[i]['isLike'] ? Colors.green : null,
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              InkWell(
+                                child: Image.asset(
+                                  'images/coach_up.png',
+                                  color: leftMsgs[i]['isLike']
+                                      ? Colors.green
+                                      : null,
+                                ),
+                                onTap: () {
+                                  if (!leftMsgs[i]['isLike']) {
+                                    leftMsgs[i]['isLike'] = true;
+                                    leftMsgs[i]['likeTimes'] =
+                                        (int.parse(leftMsgs[i]['likeTimes']) +
+                                                1)
+                                            .toString();
+                                  }
+                                  setState(() {
+                                    //todo 改变图标颜色
+                                  });
+                                },
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 6.0),
+                                  child: Text(
+                                    leftMsgs[i]['likeTimes'],
+                                    style: TextStyle(
+                                        fontSize: 10.0,
+                                        color: Color(0xFF333333)),
+                                  )),
+                            ],
                           ),
-                          onPressed: () {
-                            if (!leftMsgs[i]['isLike']) {
-                              leftMsgs[i]['isLike'] = true;
-                              leftMsgs[i]['likeTimes'] =
-                                  (int.parse(leftMsgs[i]['likeTimes']) + 1)
-                                      .toString();
-                            }
-                            setState(() {
-                              //todo 改变图标颜色
-                            });
-                          },
-                          tooltip: '点赞',
-                        ),*/
-                        Padding(
-                            padding: EdgeInsets.only(right: 10.0, left: 8.0),
-                            child: Text(
-                              leftMsgs[i]['likeTimes'],
-                              style: TextStyle(
-                                  fontSize: 10.0, color: Color(0xFF333333)),
-                            )),
+                        )
                       ],
                     ))
               ],
@@ -171,7 +159,7 @@ class _TipsTabState extends State<TipsTabView> {
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 6.0, 0.0, 6.0),
+                    padding: EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
                     child: Row(
                       children: <Widget>[
                         ClipOval(
@@ -195,56 +183,38 @@ class _TipsTabState extends State<TipsTabView> {
                             ],
                           ),
                         ),
-                        InkWell(
-                          child: Padding(
-                              padding: EdgeInsets.only(left: 20.0),
+                        Expanded(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            InkWell(
                               child: Image.asset(
                                 'images/coach_up.png',
                                 color: rightMsgs[i]['isLike']
                                     ? Colors.green
                                     : null,
-                              )),
-                          onTap: () {
-                            if (!rightMsgs[i]['isLike']) {
-                              rightMsgs[i]['isLike'] = true;
-                              rightMsgs[i]['likeTimes'] =
-                                  (int.parse(rightMsgs[i]['likeTimes']) + 1)
-                                      .toString();
-                            }
-                            setState(() {
-                              //todo 改变图标颜色
-                            });
-                          },
-                        ),
-                        /*IconButton(
-                          iconSize: 9.0,
-                          key: GlobalKey(),
-                          padding: EdgeInsets.only(left: 0.0),
-                          icon: Image.asset(
-                            'images/coach_up.png',
-                            color: rightMsgs[i]['isLike'] ? Colors.green : null,
-                            //fit: BoxFit.fill,
-                          ),
-                          onPressed: () {
-                            if (!rightMsgs[i]['isLike']) {
-                              rightMsgs[i]['isLike'] = true;
-                              rightMsgs[i]['likeTimes'] =
-                                  (int.parse(rightMsgs[i]['likeTimes']) + 1)
-                                      .toString();
-                            }
-                            setState(() {
-                              //todo 改变图标颜色
-                            });
-                          },
-                          tooltip: '点赞',
-                        ),*/
-                        Padding(
-                            padding: EdgeInsets.only(right: 10.0, left: 8.0),
-                            child: Text(
-                              rightMsgs[i]['likeTimes'],
-                              style: TextStyle(
-                                  fontSize: 10.0, color: Color(0xFF333333)),
-                            )),
+                              ),
+                              onTap: () {
+                                if (!rightMsgs[i]['isLike']) {
+                                  rightMsgs[i]['isLike'] = true;
+                                  rightMsgs[i]['likeTimes'] =
+                                      (int.parse(rightMsgs[i]['likeTimes']) + 1)
+                                          .toString();
+                                }
+                                setState(() {
+                                  //todo 改变图标颜色
+                                });
+                              },
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  rightMsgs[i]['likeTimes'],
+                                  style: TextStyle(
+                                      fontSize: 10.0, color: Color(0xFF333333)),
+                                )),
+                          ],
+                        ))
                       ],
                     ))
               ],

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/data/userInfo.dart';
+import 'package:flutter_app/data/dataCenter.dart';
 import 'package:flutter_app/pages/userInfo/heightAndWeight.dart';
 
 class LocationInfo extends StatefulWidget {
-  final UserInfo user;
-  const LocationInfo({Key key, this.user}) : super(key: key);
+  const LocationInfo({Key key}) : super(key: key);
   @override
   _LocationInfoState createState() => _LocationInfoState();
 }
@@ -93,7 +92,7 @@ class _LocationInfoState extends State<LocationInfo> {
   }
 
   buildGetlocation() {
-    var style = widget.user.city == null ? defaultStyle : selectedStyle;
+    var style = eUserInfo.city == null ? defaultStyle : selectedStyle;
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
       GestureDetector(
         child: Container(
@@ -102,7 +101,7 @@ class _LocationInfoState extends State<LocationInfo> {
           width: 173.0,
           alignment: Alignment.center,
           child: Text(
-            widget.user.city ?? '获取当前城市',
+            eUserInfo.city ?? '获取当前城市',
             style: TextStyle(color: style['text'], fontSize: 16.0),
           ),
           decoration: BoxDecoration(
@@ -117,7 +116,7 @@ class _LocationInfoState extends State<LocationInfo> {
   }
 
   _getLocation() {
-    widget.user.city = '上海市 闵行区';
+    eUserInfo.city = '上海市,闵行区';
     setState(() {});
   }
 
@@ -142,8 +141,7 @@ class _LocationInfoState extends State<LocationInfo> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          new HeightAndWeight(user: widget.user)));
+                      builder: (context) => new HeightAndWeight()));
             },
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(

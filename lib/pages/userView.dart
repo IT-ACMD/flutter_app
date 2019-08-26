@@ -1,5 +1,11 @@
 //这是HomeView类的控制页
 import 'package:flutter/material.dart';
+import 'package:flutter_app/data/dataCenter.dart';
+import 'package:flutter_app/pages/myself/exercisePlan.dart';
+import 'package:flutter_app/pages/myself/moreSettings.dart';
+import 'package:flutter_app/pages/myself/personalData.dart';
+import 'package:flutter_app/pages/myself/userPersonalCenter.dart';
+import 'package:flutter_app/pages/myself/warningSettings.dart';
 import '../widget/ecg_title_bar.dart';
 
 class UserView extends StatefulWidget {
@@ -50,77 +56,102 @@ class _UserViewState extends State<UserView> {
                   AssetImage('images/message.png'),
                   color: Colors.black,
                 )),
-            Container(
-                height: 20.0,
-                width: 20.0,
-                margin: EdgeInsets.fromLTRB(21.0, 0.0, 17.0, 0.0),
-                child: ImageIcon(
-                  AssetImage('images/settings.png'),
-                  color: Colors.black,
-                )),
+            InkWell(
+              child: Container(
+                  height: 20.0,
+                  width: 20.0,
+                  margin: EdgeInsets.fromLTRB(21.0, 0.0, 17.0, 0.0),
+                  child: ImageIcon(
+                    AssetImage('images/settings.png'),
+                    color: Colors.black,
+                  )),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                  return PersonalData();
+                }));
+              },
+            ),
           ],
         ));
   }
 
   buildUserBack() {
-    return Container(
-      padding: EdgeInsets.fromLTRB(16.0, 11.0, 20.0, 30.0),
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          ClipOval(
-              child: Image.network(
-            'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng6a41f8d82ae206d2b9c30758d99ce8e9',
-            width: 64.0,
-            height: 64.0,
-          )),
-          Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Container(
-                padding: EdgeInsets.only(left: 21.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                        padding: EdgeInsets.only(bottom: 7.0),
-                        child: Text(
-                          '非常酷的爱吃蓝莓的凡',
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF333333)),
-                        )),
-                    RichText(
-                        text: TextSpan(
-                      text: '女 | ',
-                      style: TextStyle(
-                          fontSize: 11.0,
-                          color: Color(0xFF6C6B70),
-                          wordSpacing: 3.0),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: '20岁',
+    return InkWell(
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16.0, 11.0, 20.0, 30.0),
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            ClipOval(
+                child: Image.network(
+              'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng6a41f8d82ae206d2b9c30758d99ce8e9',
+              width: 64.0,
+              height: 64.0,
+            )),
+            Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Container(
+                  padding: EdgeInsets.only(left: 21.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                          padding: EdgeInsets.only(bottom: 7.0),
+                          child: Text(
+                            '非常酷的爱吃蓝莓的凡',
                             style: TextStyle(
-                                fontSize: 11.0, color: Color(0xFF666666)))
-                      ],
-                    ))
-                  ],
-                )),
-          ),
-          Expanded(
-              child: Align(
-            //padding: EdgeInsets.only(right: 0.0),
-            alignment: Alignment.centerRight,
-            child: Image.network(
-              'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
-              height: 14.0,
-              width: 8.0,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF333333)),
+                          )),
+                      RichText(
+                          text: TextSpan(
+                        text: '女 | ',
+                        style: TextStyle(
+                            fontSize: 11.0,
+                            color: Color(0xFF6C6B70),
+                            wordSpacing: 3.0),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: '20岁',
+                              style: TextStyle(
+                                  fontSize: 11.0, color: Color(0xFF666666)))
+                        ],
+                      ))
+                    ],
+                  )),
             ),
-          ))
-        ],
+            Expanded(
+                child: Align(
+              //padding: EdgeInsets.only(right: 0.0),
+              alignment: Alignment.centerRight,
+              child: Image.network(
+                'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+                height: 14.0,
+                width: 8.0,
+              ),
+            ))
+          ],
+        ),
       ),
+      onTap: () {
+        Friend friend = Friend(
+            avatar:
+                'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng77ccd690d0bc6abb10ae2bcf62b76c4f',
+            email: '214258971@qq.com',
+            location: '上海市闵行区',
+            name: '非常酷的爱吃蓝莓的凡');
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) {
+          return FriendDetailsPage(
+            friend,
+            avatarTag: 0,
+          );
+        }));
+      },
     );
   }
 
@@ -193,50 +224,58 @@ class _UserViewState extends State<UserView> {
   }
 
   buildUserPlan() {
-    return Container(
-      margin: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(17.0, 16.0, 0.0, 23.0),
-                child: Text('我的运动计划'),
-              ),
-              Container(
-                padding: EdgeInsets.only(right: 22.0),
-                child: Image.network(
-                  'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
-                  height: 14.0,
-                  width: 8.0,
+    return InkWell(
+      child: Container(
+        margin: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(17.0, 16.0, 0.0, 23.0),
+                  child: Text('我的运动计划'),
                 ),
-              )
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.fromLTRB(17.0, 0.0, 7.0, 11.0),
-                child: Text(
-                  '95.5',
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF524d55)),
+                Container(
+                  padding: EdgeInsets.only(right: 22.0),
+                  child: Image.network(
+                    'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+                    height: 14.0,
+                    width: 8.0,
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(17.0, 0.0, 7.0, 11.0),
+                  child: Text(
+                    '${eUserInfo.weightPlan}',
+                    style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF524d55)),
+                  ),
                 ),
-              ),
-              Container(
-                child: Text(
-                  '计划体重Kg',
-                  style: TextStyle(fontSize: 11.0, color: Color(0xFF999999)),
-                ),
-              )
-            ],
-          ),
-        ],
+                Container(
+                  child: Text(
+                    '计划体重Kg',
+                    style: TextStyle(fontSize: 11.0, color: Color(0xFF999999)),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) {
+          return ExercisePlan();
+        }));
+      },
     );
   }
 
@@ -289,66 +328,82 @@ class _UserViewState extends State<UserView> {
   }
 
   buildWarningSettings() {
-    return Container(
-      margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 12.0),
-      color: Colors.white,
+    return InkWell(
       child: Container(
-          padding: EdgeInsets.fromLTRB(18.0, 15.0, 22.0, 14.0),
-          child: Row(
-            children: <Widget>[
-              Image.asset(
-                'images/warning.png',
-                width: 18.0,
-                height: 20.0,
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 10.0),
-                  child: Text(
-                    '预警设置',
-                    style: TextStyle(color: Color(0xFF524D55)),
-                  )),
-              Expanded(
-                  child: Container(
-                      alignment: Alignment.centerRight,
-                      child: Image.network(
-                        'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
-                        height: 14.0,
-                        width: 8.0,
-                      )))
-            ],
-          )),
+        margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 12.0),
+        color: Colors.white,
+        child: Container(
+            padding: EdgeInsets.fromLTRB(18.0, 15.0, 22.0, 14.0),
+            child: Row(
+              children: <Widget>[
+                Image.asset(
+                  'images/warning.png',
+                  width: 18.0,
+                  height: 20.0,
+                ),
+                Container(
+                    margin: EdgeInsets.only(left: 10.0),
+                    child: Text(
+                      '预警设置',
+                      style: TextStyle(color: Color(0xFF524D55)),
+                    )),
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerRight,
+                        child: Image.network(
+                          'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+                          height: 14.0,
+                          width: 8.0,
+                        )))
+              ],
+            )),
+      ),
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) {
+          return WarningSet();
+        }));
+      },
     );
   }
 
   buildUsergSettings() {
-    return Container(
-      margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 12.0),
-      color: Colors.white,
+    return InkWell(
       child: Container(
-          padding: EdgeInsets.fromLTRB(18.0, 15.0, 22.0, 14.0),
-          child: Row(
-            children: <Widget>[
-              Image.asset(
-                'images/settings.png',
-                width: 18.0,
-                height: 20.0,
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 10.0),
-                  child: Text(
-                    '设置',
-                    style: TextStyle(color: Color(0xFF524D55)),
-                  )),
-              Expanded(
-                  child: Container(
-                      alignment: Alignment.centerRight,
-                      child: Image.network(
-                        'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
-                        height: 14.0,
-                        width: 8.0,
-                      )))
-            ],
-          )),
+        margin: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 12.0),
+        color: Colors.white,
+        child: Container(
+            padding: EdgeInsets.fromLTRB(18.0, 15.0, 22.0, 14.0),
+            child: Row(
+              children: <Widget>[
+                Image.asset(
+                  'images/settings.png',
+                  width: 18.0,
+                  height: 20.0,
+                ),
+                Container(
+                    margin: EdgeInsets.only(left: 10.0),
+                    child: Text(
+                      '设置',
+                      style: TextStyle(color: Color(0xFF524D55)),
+                    )),
+                Expanded(
+                    child: Container(
+                        alignment: Alignment.centerRight,
+                        child: Image.network(
+                          'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePng489e0346717505fbb500e123746fe63e',
+                          height: 14.0,
+                          width: 8.0,
+                        )))
+              ],
+            )),
+      ),
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (BuildContext context) {
+          return MoreSetting();
+        }));
+      },
     );
   }
 }

@@ -1,11 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_app/data/userInfo.dart';
-import 'package:flutter_app/pages/userInfo/lifeHabit.dart';
+import 'package:flutter_app/data/dataCenter.dart';
+import 'package:flutter_app/tools/ECHttp.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 class HeightAndWeight extends StatefulWidget {
-  final UserInfo user;
-  const HeightAndWeight({Key key, this.user}) : super(key: key);
+  const HeightAndWeight({Key key}) : super(key: key);
   @override
   _HeightAndWeightState createState() => _HeightAndWeightState();
 }
@@ -18,13 +19,12 @@ class _HeightAndWeightState extends State<HeightAndWeight> {
   @override
   void initState() {
     super.initState();
-    widget.user.height = '168cm';
-    widget.user.weight = '70kg';
+    eUserInfo.height = '168cm';
+    eUserInfo.weight = '70kg';
   }
 
   @override
   Widget build(BuildContext context) {
-    //UserInfo a = widget.user;
     return Scaffold(
         appBar: AppBar(
           leading: buildBackButton(context),
@@ -42,11 +42,11 @@ class _HeightAndWeightState extends State<HeightAndWeight> {
                     SizedBox(
                       height: 62.0,
                     ),
-                    buildTitleText('你的生活习惯？'),
+                    buildTitleText('你的身高'),
                     SizedBox(
                       height: 30.0,
                     ),
-                    buildPickerIntger(0, widget.user.height),
+                    buildPickerIntger(0, eUserInfo.height),
                     SizedBox(
                       height: 80.0,
                     ),
@@ -54,7 +54,7 @@ class _HeightAndWeightState extends State<HeightAndWeight> {
                     SizedBox(
                       height: 30.0,
                     ),
-                    buildPickerIntger(1, widget.user.weight),
+                    buildPickerIntger(1, eUserInfo.weight),
                   ],
                 ),
                 buildNextButton(),
@@ -136,8 +136,8 @@ class _HeightAndWeightState extends State<HeightAndWeight> {
           );
         }).then((value) {
       type == 0
-          ? widget.user.height = '$value${item['unit']}'
-          : widget.user.weight = '$value${item['unit']}';
+          ? eUserInfo.height = '$value${item['unit']}'
+          : eUserInfo.weight = '$value${item['unit']}';
       setState(() {});
     });
   }
@@ -177,11 +177,26 @@ class _HeightAndWeightState extends State<HeightAndWeight> {
                         16.0) //Theme.of(context).primaryTextTheme.headline,
                 ),
             color: Color.fromARGB(255, 36, 199, 137),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => new LifeHabit(user: widget.user)));
+            onPressed: () async {
+              String params = 'birthdateStr=${eUserInfo.birthDate}'
+                              '&sex=${eUserInfo.sex}'
+                              '&address=${eUserInfo.city}'
+                              '&height=${eUserInfo.height}'
+                              '&weight=${eUserInfo.weight}';
+              Map map = {
+                'birthdateStr': eUserInfo.birthDate,
+                'sex':eUserInfo.sex == '男'? 0 : 1,
+                'address':eUserInfo.city,
+                'height':eUserInfo.height,
+                'weight':eUserInfo.weight,
+              };
+              String result = await ECHttp.postDataJson('user/consumerDetails/save', map);
+              if (result != null && result.length > 0) {
+                var object1 = json.decode(result);
+                if (object1['success']) {
+                  Navigator.pushNamed(context, "home");
+                }
+              }
             },
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28.0)),

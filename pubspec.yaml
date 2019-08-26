@@ -24,7 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   flutter_screenutil: ^0.5.3
-  sharesdk: ^1.1.3
+  sharesdk: ^1.1.8
   pin_input_text_field: ^1.0.1
   flutter_swiper: ^1.0.6
   numberpicker: ^1.0.0
@@ -80,6 +80,10 @@ flutter:
     - images/home_ecg_image2.png
     - images/home_ecg_image3.png
     - images/user_head.png
+    - images/followed.png
+    - images/unfollowed.png
+    - images/forward.png
+    
     
     
     

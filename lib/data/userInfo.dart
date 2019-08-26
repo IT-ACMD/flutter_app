@@ -1,7 +1,8 @@
 //用户信息数据
 class UserInfo{
 
-  String access_token;
+  String accessToken;
+  String name;
   String sex; //性别
   String birthDate; //出生日期
   String city; //所在城市
@@ -9,14 +10,19 @@ class UserInfo{
   String weight; //重量
   String lifeStyle; //生活习惯
   String historyIll; //病史
+  String weightPlan = "70";  //计划体重
+  String phone;
 
   UserInfo(
-      [this.sex,
+      [
+      this.name,
+      this.sex,
       this.birthDate,
       this.city,
       this.height,
       this.weight,
       this.lifeStyle,
       this.historyIll,
-      this.access_token]);
+      this.accessToken,
+      this.phone]);
 }

@@ -17,12 +17,16 @@ class _SearchCoachState extends State<SearchCoach> {
       ),
       body: Material(
         child: Container(
-          padding: EdgeInsets.fromLTRB(16.0, 22.0, 16.0, 0.0),
+          color: Colors.white,
+          padding: EdgeInsets.fromLTRB(16.0, 7.0, 16.0, 0.0),
           child: ListView(
             children: <Widget>[
               Text(
                 '教练',
-                style: TextStyle(color: Color(0xff333333), fontSize: 20.0),
+                style: TextStyle(
+                    color: Color(0xff333333),
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold),
               ),
               buildCoachList(),
             ],
@@ -53,14 +57,19 @@ class _SearchCoachState extends State<SearchCoach> {
       eCoachList.length,
       (i) {
         return Container(
-            margin: EdgeInsets.symmetric(vertical: 20.0),
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            decoration: BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(width: 1.0, color: Color(0xfff4f4f4))),
+            ),
             child: Row(
               children: <Widget>[
                 ClipOval(
-                    child: Image.asset(
-                  eCoachList[i].image,
-                  width: 68.0,
-                  height: 68.0,
+                    child: Image.network(
+                  'https://lanhu.oss-cn-beijing.aliyuncs.com/SketchSlicePngfa42cd7dccb1c715b014bed5a61cdddd',
+                  //eCoachList[i].image,
+                  width: 60.0,
+                  height: 60.0,
                   fit: BoxFit.fill,
                 )),
                 Container(
@@ -69,11 +78,13 @@ class _SearchCoachState extends State<SearchCoach> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 7.0),
+                            child: Text(
                           eCoachList[i].name,
                           style: TextStyle(
                               fontSize: 17.0, color: Color(0xFF333333)),
-                        ),
+                        )),
                         RichText(
                             text: TextSpan(
                           text: '心得 ${eCoachList[i].tips}  |  ',
@@ -90,18 +101,16 @@ class _SearchCoachState extends State<SearchCoach> {
                       ],
                     )),
                 Expanded(
-                  child: GestureDetector(
                     child: Container(
-                      padding: EdgeInsets.only(right: 17.0),
-                      alignment: Alignment.centerRight,
-                      child: ImageIcon(
-                        AssetImage('images/rank_friend_pk.png'),
-                        color: Color(0xFF24C789),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                ),
+                        padding: EdgeInsets.only(right: 16.0),
+                        alignment: Alignment.centerRight,
+                        child: Image.asset(
+                          i == 0
+                              ? 'images/followed.png'
+                              : 'images/unfollowed.png',
+                          height: 40.0,
+                          width: 40.0,
+                        ))),
               ],
             ));
       },

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/data/dataCenter.dart';
+import 'package:flutter_app/tools/ECHttp.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
@@ -118,18 +119,38 @@ class _LoginCodeState extends State<LoginCode> {
           onPressed: () async {
             if (_formKey.currentState.validate()) {
               ///只有输入的内容符合要求通过才会到达此处
-              _formKey.currentState.save();
-              //= 执行登录方法
-              var url = 'authentication/mobile';
-              String result =
-                  await ECHttp.postData(url, widget._phone, _password);
-              if (result.length > 0) {
-                var object = json.decode(result);
-                eUserInfo.access_token = object['access_token'];
-                //Navigator.pushNamed(context, "askPage");
+              //_formKey.currentState.save();
+              if (eIsTest) {
                 Navigator.pushNamed(context, 'home');
+              } else {
+                //= 执行登录方法
+                var url = 'authentication/mobile';
+                String params = 'mobile=${widget._phone}'
+                                '&smsCode=$_password';
+                String result =
+                    await ECHttp.postData(url, params);
+                if (result != null && result.length > 0) {
+                  var object = json.decode(result);
+                  eUserInfo.accessToken = object['access_token'];
+
+                  List hears = [
+                    {
+                      'name': 'authorization',
+                      'value': 'bearer ${eUserInfo.accessToken}'
+                    }
+                  ];
+                  String isNewPeople =
+                      await ECHttp.getData('user/consumerDetails/get', hears);
+                  if (isNewPeople != null && isNewPeople.length > 0) {
+                    var object1 = json.decode(isNewPeople);
+                    if (object1['success'] && object1['data'] != null) {
+                      Navigator.pushNamed(context, 'home');
+                    } else {
+                      Navigator.pushNamed(context, "askPage");
+                    }
+                  }
+                }
               }
-              //Navigator.pushNamed(context, "askPage");
             }
           },
           shape: RoundedRectangleBorder(

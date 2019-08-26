@@ -194,7 +194,7 @@ class _SexBirthState extends State<SexBirth> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => new LocationInfo(user: widget.user)));
+                  builder: (context) => new LocationInfo()));
         },
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
