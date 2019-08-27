@@ -1,5 +1,6 @@
 //这是HomeView类的控制页
 import 'package:flutter/material.dart';
+import 'package:flutter_app/data/dataCenter.dart';
 import 'package:flutter_app/layout/home_tab_ecg.dart';
 import '../widget/ecg_title_bar.dart';
 import '../layout/home_tab_nhr.dart';
@@ -26,6 +27,7 @@ class _SearchBarDemoState extends State<HomeView>
   @override
   void initState() {
     super.initState();
+    afterLogin();
     _bodyView = RateTabView(context);
     _controller = TabController(length: choices.length, vsync: this);
     _controller.index = 1;

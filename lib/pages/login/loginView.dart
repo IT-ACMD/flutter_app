@@ -363,7 +363,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void authToQQ(BuildContext context) {
-    ShareSDK.auth(ShareSDKPlatforms.qq, null,
+    ShareSDK.getUserInfo(ShareSDKPlatforms.qq,
         (SSDKResponseState state, Map user, SSDKError error) {
       showAlert(state, user != null ? user : error.rawData, context);
     });

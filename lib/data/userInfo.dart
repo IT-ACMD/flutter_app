@@ -1,7 +1,5 @@
 //用户信息数据
-class UserInfo{
-
-  String accessToken;
+class UserInfo {
   String name;
   String sex; //性别
   String birthDate; //出生日期
@@ -10,11 +8,12 @@ class UserInfo{
   String weight; //重量
   String lifeStyle; //生活习惯
   String historyIll; //病史
-  String weightPlan = "70";  //计划体重
+  String weightPlan = "70"; //计划体重
   String phone;
 
   UserInfo(
-      [
+      {
+      //@required this.padding,
       this.name,
       this.sex,
       this.birthDate,
@@ -23,6 +22,5 @@ class UserInfo{
       this.weight,
       this.lifeStyle,
       this.historyIll,
-      this.accessToken,
-      this.phone]);
+      this.phone});
 }

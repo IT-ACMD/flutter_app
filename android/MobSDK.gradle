@@ -1,8 +1,8 @@
 apply plugin: 'com.mob.sdk'
 
 MobSDK {
-    appKey "2bb7e089f3bb6"//moba6b6c6d6
-    appSecret "0b22f2cc72018bb2a840a4460721cb1d"//b89d2427a3bc7ad1aea1e1e8c1d36bf3
+    appKey "moba6b6c6d6"//2bb7e089f3bb6
+    appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"//0b22f2cc72018bb2a840a4460721cb1d
 
     ShareSDK {
 
@@ -51,12 +51,22 @@ MobSDK {
             Wechat {
                 id 4
                 sortId 4
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                appId "1109656823"//wx4868b35061f87885
+                appSecret "Jwfrd0sTm5SzNKgT"//64020361b8ec4c99936c0e3999a9f249
                 userName "gh_afb25ac019c9"
                 path "pages/index/index.html?id=1"
                 withShareTicket true
                 miniprogramType 0
+                bypassApproval false
+                enable true
+            }
+
+            QQ {
+                id 7
+                sortId 7
+                appId "1109656823"//100371282
+                appKey "Jwfrd0sTm5SzNKgT"//aed9b0303e3ed1e27bae87c33761161d
+                shareByAppClient true
                 bypassApproval false
                 enable true
             }
@@ -75,16 +85,6 @@ MobSDK {
                 sortId 6
                 appId "wx4868b35061f87885"
                 appSecret "64020361b8ec4c99936c0e3999a9f249"
-                bypassApproval false
-                enable true
-            }
-
-            QQ {
-                id 7
-                sortId 7
-                appId "100371282"
-                appKey "aed9b0303e3ed1e27bae87c33761161d"
-                shareByAppClient true
                 bypassApproval false
                 enable true
             }

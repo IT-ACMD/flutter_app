@@ -55,7 +55,7 @@ class _FriendDetailsPageState extends State<FriendDetailsPage> {
 }
 
 class FriendDetailHeader extends StatelessWidget {
-  static const BACKGROUND_IMAGE = 'images/profile_header_background.png';
+  static const BACKGROUND_IMAGE = 'images/profile_header_background.png';//images/background.png
 
   FriendDetailHeader(
     this.friend, {

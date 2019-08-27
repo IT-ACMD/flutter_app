@@ -178,11 +178,6 @@ class _HeightAndWeightState extends State<HeightAndWeight> {
                 ),
             color: Color.fromARGB(255, 36, 199, 137),
             onPressed: () async {
-              String params = 'birthdateStr=${eUserInfo.birthDate}'
-                              '&sex=${eUserInfo.sex}'
-                              '&address=${eUserInfo.city}'
-                              '&height=${eUserInfo.height}'
-                              '&weight=${eUserInfo.weight}';
               Map map = {
                 'birthdateStr': eUserInfo.birthDate,
                 'sex':eUserInfo.sex == '男'? 0 : 1,

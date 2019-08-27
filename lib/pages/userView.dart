@@ -101,7 +101,7 @@ class _UserViewState extends State<UserView> {
                       Container(
                           padding: EdgeInsets.only(bottom: 7.0),
                           child: Text(
-                            '非常酷的爱吃蓝莓的凡',
+                            eAccountData.nickName,
                             style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,

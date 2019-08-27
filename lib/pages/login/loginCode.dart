@@ -131,12 +131,12 @@ class _LoginCodeState extends State<LoginCode> {
                     await ECHttp.postData(url, params);
                 if (result != null && result.length > 0) {
                   var object = json.decode(result);
-                  eUserInfo.accessToken = object['access_token'];
+                  eAccountData.accessToken = object['access_token'];
 
                   List hears = [
                     {
                       'name': 'authorization',
-                      'value': 'bearer ${eUserInfo.accessToken}'
+                      'value': 'bearer ${eAccountData.accessToken}'
                     }
                   ];
                   String isNewPeople =
