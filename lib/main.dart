@@ -10,7 +10,7 @@ import 'pages/login_register/loginView.dart';
 import 'pages/login_register/registerView.dart';
 
 main() async {
-  //是否近期成功登录过
+  //是否近期成功登录过 呢
   String url = await Filehelper.getAppdataUrl();
   File token = new File('$url/$accessTokenName');
   bool isNeedLogin = true;
