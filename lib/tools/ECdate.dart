@@ -1,5 +1,3 @@
-import 'package:date_format/date_format.dart';
-
 class ECdate {
 
   /*根据年份月份获取当前月有多少天*/

@@ -51,8 +51,8 @@ MobSDK {
             Wechat {
                 id 4
                 sortId 4
-                appId "1109656823"//wx4868b35061f87885
-                appSecret "Jwfrd0sTm5SzNKgT"//64020361b8ec4c99936c0e3999a9f249
+                appId "wx4868b35061f87885"//1109656823
+                appSecret "64020361b8ec4c99936c0e3999a9f249"//Jwfrd0sTm5SzNKgT
                 userName "gh_afb25ac019c9"
                 path "pages/index/index.html?id=1"
                 withShareTicket true
