@@ -1,8 +1,9 @@
 package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
+import com.jzoom.amaplocation.AmapLocationPlugin;
+import com.pauldemarco.flutterblue.FlutterBluePlugin;
 import io.flutter.plugins.pathprovider.PathProviderPlugin;
-import com.shinow.qrscan.QrscanPlugin;
 import com.yoozoo.sharesdk.SharesdkPlugin;
 
 /**
@@ -13,8 +14,9 @@ public final class GeneratedPluginRegistrant {
     if (alreadyRegisteredWith(registry)) {
       return;
     }
+    AmapLocationPlugin.registerWith(registry.registrarFor("com.jzoom.amaplocation.AmapLocationPlugin"));
+    FlutterBluePlugin.registerWith(registry.registrarFor("com.pauldemarco.flutterblue.FlutterBluePlugin"));
     PathProviderPlugin.registerWith(registry.registrarFor("io.flutter.plugins.pathprovider.PathProviderPlugin"));
-    QrscanPlugin.registerWith(registry.registrarFor("com.shinow.qrscan.QrscanPlugin"));
     SharesdkPlugin.registerWith(registry.registrarFor("com.yoozoo.sharesdk.SharesdkPlugin"));
   }
 

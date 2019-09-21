@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:flutter_app/data/userInfo.dart';
-import 'package:flutter_app/tools/ECHttp.dart';
-
+import '../tools/Bluehelper.dart';
+import '../tools/ECHttp.dart';
 import 'accountData.dart';
 import 'coachData.dart';
 import 'recordWeight.dart';
+import 'userInfo.dart';
 
 //是否测试
-final eIsTest = true;
+final eIsTest = false;
 //账户信息
 final eAccountData = AccountData(
   nickName: '测试用户',
@@ -63,7 +63,7 @@ toLoginByToken() async {
 afterLogin() {
   getAccountData();
   getUserData();
-  //BlueHelper.initstate();
+  BlueHelper.initstate();
   //获取历史的体重记录数据
   getRecordData();
 }
